@@ -1,22 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 	[SerializeField]
 	private string controllerPrefix = "";
 
-	private enum Movement { Up, Left, Down, Right, Jump };
+	private enum Direction { Up, Left, Down, Right, Jump };
 
 	// Tiles to move.
-	const int moveDistance = 1;
-	const int jumpDistance = 2;
+	private const int moveDistance = 1;
+	private const int jumpDistance = 2;
+	private const int layerMask = 1 << 8;
+
+	private const float playerRadius = 0.5f;
+	private const float raycastDistance = 0.9f;
 
 	private bool canMoveVertically = true;
 	private bool canMoveHorizontally = true;
 	private bool canJump = true;
 
-	void Update() {
+	private void FixedUpdate() {
 		if (Input.GetAxis(controllerPrefix + "Vertical") == 0) {
 			canMoveVertically = true;
 		}
@@ -31,28 +33,28 @@ public class PlayerMovement : MonoBehaviour {
 
 		// Checks for player input.
 		if ((Input.GetAxis(controllerPrefix + "Vertical") > 0) && (canMoveVertically)) {
-			CheckMoveDirection(Movement.Up);
+			CheckMoveDirection(Direction.Up);
 			canMoveVertically = false;
 		}
 
 		if ((Input.GetAxis(controllerPrefix + "Horizontal") < 0) && (canMoveHorizontally)) {
-			CheckMoveDirection(Movement.Left);
+			CheckMoveDirection(Direction.Left);
 			canMoveHorizontally = false;
 		}
 
 		if ((Input.GetAxis(controllerPrefix + "Vertical") < 0) && (canMoveVertically)) {
-			CheckMoveDirection(Movement.Down);
+			CheckMoveDirection(Direction.Down);
 			canMoveVertically = false;
 		}
 
 		if ((Input.GetAxis(controllerPrefix + "Horizontal") > 0) && (canMoveHorizontally)) {
-			CheckMoveDirection(Movement.Right);
+			CheckMoveDirection(Direction.Right);
 			canMoveHorizontally = false;
 		}
 
 		if ((Input.GetAxis(controllerPrefix + "Jump") > 0) && (canJump))
 		{
-			CheckMoveDirection(Movement.Jump);
+			CheckMoveDirection(Direction.Jump);
 			canJump = false;
 		}
 	}
@@ -61,53 +63,59 @@ public class PlayerMovement : MonoBehaviour {
 	/// Checks if the player can move in the desired direction then calls a method to move.
 	/// </summary>
 	/// <param name="moveDirection"> The direction to move. </param>
-	private void CheckMoveDirection (Movement moveDirection) {
+	private void CheckMoveDirection (Direction moveDirection) {
 		// Used for checking objects around the player.
 		RaycastHit2D ray;
 
-		int layerMask = 1 << 8;
-
 		switch (moveDirection) {
-			case Movement.Up: {
-				ray = Physics2D.Raycast(gameObject.transform.position, Vector2.up, moveDistance, layerMask);
+			case Direction.Up: {
+				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + playerRadius), Vector2.up, raycastDistance, layerMask);
 
-				if (!ray.collider) {
+				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player"))) {
 					Move(moveDirection);
+				} else if (ray.collider.CompareTag("Player")) {
+					Push(moveDirection, ray);
 				}
 
 				break;
 			}
-			case Movement.Left: {
-				ray = Physics2D.Raycast(gameObject.transform.position, Vector2.left, moveDistance, layerMask);
+			case Direction.Left: {
+				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x - playerRadius, gameObject.transform.position.y), Vector2.left, raycastDistance, layerMask);
 
-				if (!ray.collider) {
+				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player"))) {
 					Move(moveDirection);
+				} else if (ray.collider.CompareTag("Player")) {
+					Push(moveDirection, ray);
 				}
 
 				break;
 			}
-			case Movement.Down: {
-				ray = Physics2D.Raycast(gameObject.transform.position, Vector2.down, moveDistance, layerMask);
+			case Direction.Down: {
+				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - playerRadius), Vector2.down, raycastDistance, layerMask);
 
-				if (!ray.collider) {
+				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player"))) {
 					Move(moveDirection);
+				} else if (ray.collider.CompareTag("Player")) {
+					Push(moveDirection, ray);
 				}
 
 				break;
 			}
-			case Movement.Right: {
-				ray = Physics2D.Raycast(gameObject.transform.position, Vector2.right, moveDistance, layerMask);
+			case Direction.Right: {
+				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + playerRadius, gameObject.transform.position.y), Vector2.right, raycastDistance, layerMask);
 
-				if (!ray.collider) {
+				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player"))) {
 					Move(moveDirection);
+				} else if (ray.collider.CompareTag("Player")) {
+					Push(moveDirection, ray);
 				}
 
 				break;
 			}
-			case Movement.Jump: {
-				ray = Physics2D.Raycast(gameObject.transform.position, Vector2.up, jumpDistance, layerMask);
+			case Direction.Jump: {
+				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + playerRadius), Vector2.up, raycastDistance, layerMask);
 
-				if (!ray.collider) {
+				if (!ray.collider || !ray.collider.CompareTag("Wall")) {
 					Move(moveDirection);
 				}
 
@@ -120,26 +128,77 @@ public class PlayerMovement : MonoBehaviour {
 	/// Moves the player in the desired direction.
 	/// </summary>
 	/// <param name="moveDirection"> The direction to move. </param>
-	private void Move(Movement moveDirection) {
+	private void Move(Direction moveDirection) {
 		switch (moveDirection) {
-			case Movement.Up: {
+			case Direction.Up: {
 				gameObject.transform.Translate((Vector2.up * moveDistance), Space.World);
 				break;
 			}
-			case Movement.Left: {
+			case Direction.Left: {
 				gameObject.transform.Translate((Vector2.left * moveDistance), Space.World);
 				break;
 			}
-			case Movement.Down: {
+			case Direction.Down: {
 				gameObject.transform.Translate((Vector2.down * moveDistance), Space.World);
 				break;
 			}
-			case Movement.Right: {
+			case Direction.Right: {
 				gameObject.transform.Translate((Vector2.right * moveDistance), Space.World);
 				break;
 			}
-			case Movement.Jump: {
+			case Direction.Jump: {
 				gameObject.transform.Translate((Vector2.up * jumpDistance), Space.World);
+				break;
+			}
+		}
+	}
+
+	/// <summary>
+	/// Pushes an object in the direction the player is trying to move, the moves the player into its place.
+	/// </summary>
+	/// <param name="pushDirection"> The direction to push. </param>
+	private void Push(Direction pushDirection, RaycastHit2D pushObject) {
+		RaycastHit2D ray;
+
+		switch (pushDirection) {
+			case Direction.Up: {
+				ray = Physics2D.Raycast(new Vector2(pushObject.transform.position.x, pushObject.transform.position.y + playerRadius), Vector2.up, raycastDistance, layerMask);
+
+				if ((!ray.collider) || (!ray.collider.CompareTag("Wall"))) {
+					pushObject.transform.Translate((Vector2.up * moveDistance), Space.World);
+					Move(pushDirection);
+				}
+
+				break;
+			}
+			case Direction.Left: {
+				ray = Physics2D.Raycast(new Vector2(pushObject.transform.position.x - playerRadius, pushObject.transform.position.y), Vector2.left, raycastDistance, layerMask);
+
+				if ((!ray.collider) || (!ray.collider.CompareTag("Wall"))) {
+					pushObject.transform.Translate((Vector2.left * moveDistance), Space.World);
+					Move(pushDirection);
+				}
+
+				break;
+			}
+			case Direction.Down: {
+				ray = Physics2D.Raycast(new Vector2(pushObject.transform.position.x, pushObject.transform.position.y - playerRadius), Vector2.down, raycastDistance, layerMask);
+
+				if ((!ray.collider) || (!ray.collider.CompareTag("Wall"))) {
+					pushObject.transform.Translate((Vector2.down * moveDistance), Space.World);
+					Move(pushDirection);
+				}
+
+				break;
+			}
+			case Direction.Right: {
+				ray = Physics2D.Raycast(new Vector2(pushObject.transform.position.x + playerRadius, pushObject.transform.position.y), Vector2.right, raycastDistance, layerMask);
+
+				if ((!ray.collider) || (!ray.collider.CompareTag("Wall"))) {
+					pushObject.transform.Translate((Vector2.right * moveDistance), Space.World);
+					Move(pushDirection);
+				}
+
 				break;
 			}
 		}

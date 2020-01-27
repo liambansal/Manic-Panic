@@ -1,17 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LavaMovement : MonoBehaviour {
 	private Rigidbody2D lavaRigidbody = null;
 
-	private int movementSpeed = 2;
+	[SerializeField]
+	private float movementSpeed = 1;
+
+	[SerializeField]
+	private float s;
 
 	private void Start() {
 		lavaRigidbody = gameObject.GetComponent<Rigidbody2D>();
 	}
 
-	private void Update() {
-		lavaRigidbody.AddForce(Vector2.up * Time.deltaTime * movementSpeed);
+	private void FixedUpdate() {
+		s = lavaRigidbody.velocity.y;
+		lavaRigidbody.AddForce((Vector2.up * Time.deltaTime * movementSpeed), ForceMode2D.Force);
     }
 }
