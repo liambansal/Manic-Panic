@@ -203,4 +203,14 @@ public class PlayerMovement : MonoBehaviour {
 			}
 		}
 	}
+
+	private void EnableMovement() {
+		canMoveHorizontally = true;
+		canMoveVertically = true;
+	}
+
+	private void DisableMovement() {
+		canMoveHorizontally = false;
+		canMoveVertically = false;
+	}
 }

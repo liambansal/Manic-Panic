@@ -8,11 +8,13 @@ public class FinishLine : MonoBehaviour {
 	[SerializeField]
 	private Text winTextbox = null;
 
-	private void OnTriggerEnter(Collider other) {
-		if (other.gameObject.CompareTag("Player")) {
-			winTextbox.text = (playerOne + "Wins");
+	private void OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.name == playerOne) {
+			winTextbox.text = (playerOne + " Wins");
+			Time.timeScale = 0;
 		} else if (other.gameObject.name == playerTwo) {
-			winTextbox.text = (playerTwo + "Wins");
+			winTextbox.text = (playerTwo + " Wins");
+			Time.timeScale = 0;
 		}
 	}
 }

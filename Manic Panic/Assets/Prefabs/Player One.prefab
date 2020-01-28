@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 274031972065422449}
   - component: {fileID: 274031972065422446}
   - component: {fileID: 274031972065422445}
+  - component: {fileID: 92928716}
+  - component: {fileID: 8789873605414349059}
   m_Layer: 8
   m_Name: Player One
   m_TagString: Player
@@ -72,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 6a6d8ac4d4756e342992123c9cfa6bc6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5518868, g: 1, b: 0.95797616, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -142,3 +144,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerPrefix: P1
+--- !u!114 &92928716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274031972065422442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baca02404b51cd047a982956688c97fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerPrefix: P1
+--- !u!114 &8789873605414349059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274031972065422442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cae3e8a0f03b3d64f9bb632c617c5837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiBox: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  playerSprite: {fileID: 21300000, guid: 6a6d8ac4d4756e342992123c9cfa6bc6, type: 3}
