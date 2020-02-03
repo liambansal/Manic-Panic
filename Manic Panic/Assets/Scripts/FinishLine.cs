@@ -1,20 +1,28 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class FinishLine : MonoBehaviour {
-	private string playerOne = "Player One";
-	private string playerTwo = "Player Two";
-
+public class FinishLine : ScoreController {
 	[SerializeField]
 	private Text winTextbox = null;
 
+	private int playersFinished = 0;
+
 	private void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.name == playerOne) {
-			winTextbox.text = (playerOne + " Wins");
+		if (other.gameObject.name == "Player One") {
+			Destroy(other.gameObject);
+			++playersFinished;
+			DisplayWinner();
+		} else if (other.gameObject.name == "Player Two") {
+			Destroy(other.gameObject);
+			++playersFinished;
+			DisplayWinner();
+		}
+	}
+
+	private void DisplayWinner() {
+		if (playersFinished == 2) {
 			Time.timeScale = 0;
-		} else if (other.gameObject.name == playerTwo) {
-			winTextbox.text = (playerTwo + " Wins");
-			Time.timeScale = 0;
+			winTextbox.text = CompareScore();
 		}
 	}
 }
