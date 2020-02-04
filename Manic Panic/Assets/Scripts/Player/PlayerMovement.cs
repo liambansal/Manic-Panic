@@ -4,6 +4,9 @@ public class PlayerMovement : MonoBehaviour {
 	[SerializeField]
 	private string controllerPrefix = "";
 
+	[SerializeField]
+	private GameObject movePosition = null;
+
 	private enum Direction { Up, Left, Down, Right, Jump };
 
 	// Tiles to move.
@@ -60,7 +63,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Checks if the player can move in the desired direction then calls a method to move.
+	/// Checks if the character can move in the desired direction then calls a method to move.
 	/// </summary>
 	/// <param name="moveDirection"> The direction to move. </param>
 	private void CheckMoveDirection (Direction moveDirection) {
@@ -71,7 +74,8 @@ public class PlayerMovement : MonoBehaviour {
 			case Direction.Up: {
 				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + playerRadius), Vector2.up, raycastDistance, layerMask);
 
-				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player"))) {
+				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Move Position"))) {
+					movePosition.transform.localPosition = Vector2.up;
 					Move(moveDirection);
 				} else if (ray.collider.CompareTag("Player")) {
 					Push(moveDirection, ray);
@@ -82,7 +86,8 @@ public class PlayerMovement : MonoBehaviour {
 			case Direction.Left: {
 				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x - playerRadius, gameObject.transform.position.y), Vector2.left, raycastDistance, layerMask);
 
-				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player"))) {
+				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Move Position"))) {
+					movePosition.transform.localPosition = Vector2.left;
 					Move(moveDirection);
 				} else if (ray.collider.CompareTag("Player")) {
 					Push(moveDirection, ray);
@@ -93,7 +98,8 @@ public class PlayerMovement : MonoBehaviour {
 			case Direction.Down: {
 				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - playerRadius), Vector2.down, raycastDistance, layerMask);
 
-				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player"))) {
+				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Move Position"))) {
+					movePosition.transform.localPosition = Vector2.down;
 					Move(moveDirection);
 				} else if (ray.collider.CompareTag("Player")) {
 					Push(moveDirection, ray);
@@ -104,7 +110,8 @@ public class PlayerMovement : MonoBehaviour {
 			case Direction.Right: {
 				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + playerRadius, gameObject.transform.position.y), Vector2.right, raycastDistance, layerMask);
 
-				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player"))) {
+				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Move Position"))) {
+					movePosition.transform.localPosition = Vector2.right;
 					Move(moveDirection);
 				} else if (ray.collider.CompareTag("Player")) {
 					Push(moveDirection, ray);
@@ -125,25 +132,29 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Moves the player in the desired direction.
+	/// Moves the character and its move collider in the desired direction.
 	/// </summary>
 	/// <param name="moveDirection"> The direction to move. </param>
 	private void Move(Direction moveDirection) {
 		switch (moveDirection) {
 			case Direction.Up: {
 				gameObject.transform.Translate((Vector2.up * moveDistance), Space.World);
+				movePosition.transform.localPosition = Vector2.zero;
 				break;
 			}
 			case Direction.Left: {
 				gameObject.transform.Translate((Vector2.left * moveDistance), Space.World);
+				movePosition.transform.localPosition = Vector2.zero;
 				break;
 			}
 			case Direction.Down: {
 				gameObject.transform.Translate((Vector2.down * moveDistance), Space.World);
+				movePosition.transform.localPosition = Vector2.zero;
 				break;
 			}
 			case Direction.Right: {
 				gameObject.transform.Translate((Vector2.right * moveDistance), Space.World);
+				movePosition.transform.localPosition = Vector2.zero;
 				break;
 			}
 			case Direction.Jump: {
@@ -154,7 +165,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Pushes an object in the direction the player is trying to move, the moves the player into its place.
+	/// Pushes an object in the direction the player is trying to move, then moves the character into its place.
 	/// </summary>
 	/// <param name="pushDirection"> The direction to push. </param>
 	private void Push(Direction pushDirection, RaycastHit2D pushObject) {

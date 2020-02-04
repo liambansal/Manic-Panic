@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Danger
   - Wall
+  - Move Position
   layers:
   - Default
   - TransparentFX
