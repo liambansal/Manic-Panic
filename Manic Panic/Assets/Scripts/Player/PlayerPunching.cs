@@ -4,7 +4,7 @@ public class PlayerPunching : MonoBehaviour {
 	[SerializeField]
 	private string controllerPrefix = "";
 
-	private float playerRadius = 0.5f;
+	private const float playerRadius = 0.5f;
 
 	private bool canPunch = true;
 
@@ -43,50 +43,46 @@ public class PlayerPunching : MonoBehaviour {
 
 	private void Punch(Directions punchDirection) {
 		RaycastHit2D ray;
-		int layerMask = 1 << 8;
-		float punchReach = 0.9f;
+		const int layerMask = 1 << 8;
+		const float punchReach = 0.9f;
 
 		switch (punchDirection) {
 			case Directions.Up: {
 				ray = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + playerRadius), Vector2.up, punchReach, layerMask);
-				Debug.DrawRay(new Vector2(transform.position.x, transform.position.y + playerRadius), Vector2.up, Color.red, Mathf.Infinity);
 
 				if (ray.collider && ray.collider.gameObject.CompareTag("Player")) {
 					// TODO: Play punch animation.
-					ray.collider.SendMessage("Stunned");
+					ray.collider.gameObject.SendMessage("Stunned");
 				}
 
 				break;
 			}
 			case Directions.Left: {
 				ray = Physics2D.Raycast(new Vector2(transform.position.x - playerRadius, transform.position.y), Vector2.left, punchReach, layerMask);
-				Debug.DrawRay(new Vector2(transform.position.x - playerRadius, transform.position.y), Vector2.left, Color.blue, Mathf.Infinity);
 
 				if (ray.collider && ray.collider.gameObject.CompareTag("Player")) {
 					// TODO: Play punch animation.
-					ray.collider.SendMessage("Stunned");
+					ray.collider.gameObject.SendMessage("Stunned");
 				}
 
 				break;
 			}
 			case Directions.Down: {
 				ray = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - playerRadius), Vector2.down, punchReach, layerMask);
-				Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - playerRadius), Vector2.down, Color.green, Mathf.Infinity);
 
 				if (ray.collider && ray.collider.gameObject.CompareTag("Player")) {
 					// TODO: Play punch animation.
-					ray.collider.SendMessage("Stunned");
+					ray.collider.gameObject.SendMessage("Stunned");
 				}
 
 				break;
 			}
 			case Directions.Right: {
 				ray = Physics2D.Raycast(new Vector2(transform.position.x + playerRadius, transform.position.y), Vector2.right, punchReach, layerMask);
-				Debug.DrawRay(new Vector2(transform.position.x + playerRadius, transform.position.y), Vector2.right, Color.yellow, Mathf.Infinity);
 
 				if (ray.collider && ray.collider.gameObject.CompareTag("Player")) {
 					// TODO: Play punch animation.
-					ray.collider.SendMessage("Stunned");
+					ray.collider.gameObject.SendMessage("Stunned");
 				}
 
 				break;

@@ -11,41 +11,65 @@ public class ScoreController : MonoBehaviour {
 	private int playerOneScore = 0;
 	private int playerTwoScore = 0;
 
-	internal void IncreaseScore(string playerName, int scoreValue) {
+	private void Start() {
+		playerOneScore = GameObject.Find("Player One").GetComponent<TreasureBag>().CoinsCollected;
+		playerTwoScore = GameObject.Find("Player Two").GetComponent<TreasureBag>().CoinsCollected;
+	}
+
+	public void IncreaseScore(string playerName, int treasureValue) {
 		if (playerName == "Player One") {
-			playerOneScore += scoreValue;
+			playerOneScore += treasureValue;
 			playerOneScoreText.text = ("Blue Score: " + playerOneScore.ToString());
 		}
 
 		if (playerName == "Player Two") {
-			playerTwoScore += scoreValue;
+			playerTwoScore += treasureValue;
+			playerTwoScoreText.text = ("Red Score: " + playerTwoScore.ToString());
+		}
+	}
+
+	public void DecreaseScore(string playerName, int scoreValue) {
+		if (playerName == "Player One") {
+			playerOneScore -= scoreValue;
+			playerOneScoreText.text = ("Blue Score: " + playerOneScore.ToString());
+		}
+
+		if (playerName == "Player Two") {
+			playerTwoScore -= scoreValue;
 			playerTwoScoreText.text = ("Red Score: " + playerTwoScore.ToString());
 		}
 	}
 
 	internal string CompareScore(LinkedList<string> players) {
-		//int score = 0;
-		//string topScorer = null;
+		int topScore = 0;
+		string winText = null;
 
-		foreach (string player in players) {
-			string playerString = player.Substring(0, 6).ToLower();
-			string playerIentifier = player.Substring(7);
-			string convertedString = playerString + playerIentifier;
-
-			//if ( > score) {
-			//	score = ;
-			//	topScorer = player;
-			//}
+		if (players.Count == 0) {
+			winText = "It's A Draw!";
+			return winText;
 		}
 
-		//if (p1Score > p2Score) {
-		//	return "Player One Wins!";
-		//} else if (p2Score > p1Score) {
-		//	return "Player Two Wins!";
-		//} else if (p1Score == p2Score) {
-		//	return "It's A Tie!";
-		//}
+		if (players.Contains("Player Two") && players.Contains("Player One")) {
+			if (playerOneScore == playerTwoScore) {
+				winText = "It's A Draw!";
+				return winText;
+			}
+		}
 
-		return null;
+		if (players.Contains("Player One")) {
+			if (playerOneScore > topScore) {
+				winText = "Player One Wins!";
+				topScore = playerOneScore;
+			}
+		}
+
+		if (players.Contains("Player Two")) {
+			if (playerTwoScore > topScore) {
+				winText = "Player Two Wins!";
+				topScore = playerTwoScore;
+			}
+		}
+
+		return winText;
 	}
 }

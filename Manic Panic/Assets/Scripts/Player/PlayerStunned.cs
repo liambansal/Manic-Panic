@@ -28,6 +28,7 @@ public class PlayerStunned : MonoBehaviour {
 	private void Stunned() {
 		stunned = true;
 		gameObject.SendMessage("DisableMovement");
-		gameObject.GetComponent<SpriteRenderer>().sprite = uiBox;
+		gameObject.GetComponent<SpriteRenderer>().sprite = uiBox; // TODO: delete line once animation is in place
+		gameObject.SendMessage("DropTreasure");
 	}
 }

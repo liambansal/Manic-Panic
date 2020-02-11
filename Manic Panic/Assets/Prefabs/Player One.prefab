@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 274031972065422445}
   - component: {fileID: 92928716}
   - component: {fileID: 8789873605414349059}
+  - component: {fileID: -5188720507579574264}
   m_Layer: 8
   m_Name: Player One
   m_TagString: Player
@@ -173,6 +174,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiBox: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   playerSprite: {fileID: 21300000, guid: 6a6d8ac4d4756e342992123c9cfa6bc6, type: 3}
+--- !u!114 &-5188720507579574264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274031972065422442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77a1b431208f7e042b3ffa5b3e672358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: {fileID: 3922093559215771625, guid: 86e5071a7628c5649a7f19fb0ff41600, type: 3}
 --- !u!1 &7390045388220846021
 GameObject:
   m_ObjectHideFlags: 0

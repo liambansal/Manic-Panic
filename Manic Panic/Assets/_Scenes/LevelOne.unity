@@ -277,6 +277,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1772228113}
+  - {fileID: 738889809}
   - {fileID: 1016092333}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -7578,8 +7579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584850fce54f60f4d8b1b3ec468a75ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p1ScoreText: {fileID: 769450866}
-  p2ScoreText: {fileID: 1362914989}
+  playerOneScoreText: {fileID: 769450866}
+  playerTwoScoreText: {fileID: 1362914989}
 --- !u!4 &265591980
 Transform:
   m_ObjectHideFlags: 0
@@ -7738,7 +7739,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -10}
+  m_LocalPosition: {x: 0, y: 38.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9925,6 +9926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe76bbfae5d420942a0a5e8db03a0150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finishLine: {fileID: 2012022789}
 --- !u!19719996 &723208475
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -9941,6 +9943,42 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 100
   m_ExtrusionFactor: 0.00001
+--- !u!1 &738889808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 738889809}
+  m_Layer: 0
+  m_Name: Red Score
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &738889809
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738889808}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1362914988}
+  m_Father: {fileID: 67711503}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &769450864
 GameObject:
   m_ObjectHideFlags: 0
@@ -9973,11 +10011,11 @@ RectTransform:
   m_Father: {fileID: 1772228113}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: 50}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &769450866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11723,7 +11761,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 67711503}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11931,14 +11969,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1772228113}
-  m_RootOrder: 1
+  m_Father: {fileID: 738889809}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 250, y: 50}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1362914989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12236,7 +12274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1660574459}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -10}
+  m_LocalPosition: {x: 0, y: 38.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -13706,7 +13744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1772228113}
   m_Layer: 0
-  m_Name: Score Text
+  m_Name: Blue Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13724,7 +13762,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 769450865}
-  - {fileID: 1362914988}
   m_Father: {fileID: 67711503}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14106,7 +14143,7 @@ PrefabInstance:
     - target: {fileID: 274031972065422447, guid: 1e47861127c16f049b4aa8cc7a50efde,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 38.5
       objectReference: {fileID: 0}
     - target: {fileID: 274031972065422447, guid: 1e47861127c16f049b4aa8cc7a50efde,
         type: 3}
@@ -14244,7 +14281,7 @@ PrefabInstance:
     - target: {fileID: 4660086462708120174, guid: 4011473f0fbc718478b80bef83f13919,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 38.5
       objectReference: {fileID: 0}
     - target: {fileID: 4660086462708120174, guid: 4011473f0fbc718478b80bef83f13919,
         type: 3}

@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerPunching.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStunned.cs" />
+    <Compile Include="Assets\Scripts\Player\TreasureBag.cs" />
     <Compile Include="Assets\Scripts\ScoreController.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/s1902869/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
