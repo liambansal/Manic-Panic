@@ -21,22 +21,22 @@ public class TreasureBag : MonoBehaviour {
 		++coinsCollected;
 		scoreController.GetComponent<ScoreController>().IncreaseScore(gameObject.name, 10);
 	}
-
-	// TODO: Finish implementing this method.
+	
 	private void DropTreasure() {
 		if (coinsCollected > 0) {
 			RaycastHit2D ray;
-			int direction = 0;
 
-			for (int i = 0; i < 1;) {
-				switch (direction) {
+			for (int i = 1; i <= 4;) {
+				switch (i) {
 					case 1: {
-						ray = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + playerRadius), Vector2.up);
+						ray = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + playerRadius), Vector2.up, 0.9f);
 
 						if (!ray.collider) {
 							Instantiate(coin, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
 							--coinsCollected;
 							scoreController.GetComponent<ScoreController>().DecreaseScore(gameObject.name, 10);
+							i += 4;
+						} else {
 							++i;
 						}
 
@@ -44,12 +44,14 @@ public class TreasureBag : MonoBehaviour {
 					}
 
 					case 2: {
-						ray = Physics2D.Raycast(new Vector2(transform.position.x - playerRadius, transform.position.y), Vector2.left);
+						ray = Physics2D.Raycast(new Vector2(transform.position.x - playerRadius, transform.position.y), Vector2.left, 0.9f);
 
 						if (!ray.collider) {
 							Instantiate(coin, new Vector2(transform.position.x - 1, transform.position.y), Quaternion.identity);
 							--coinsCollected;
 							scoreController.GetComponent<ScoreController>().DecreaseScore(gameObject.name, 10);
+							i += 4;
+						} else {
 							++i;
 						}
 
@@ -57,12 +59,14 @@ public class TreasureBag : MonoBehaviour {
 					}
 
 					case 3: {
-						ray = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - playerRadius), Vector2.down);
+						ray = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - playerRadius), Vector2.down, 0.9f);
 
 						if (!ray.collider) {
 							Instantiate(coin, new Vector2(transform.position.x, transform.position.y - 1), Quaternion.identity);
 							--coinsCollected;
 							scoreController.GetComponent<ScoreController>().DecreaseScore(gameObject.name, 10);
+							i += 4;
+						} else {
 							++i;
 						}
 
@@ -70,12 +74,14 @@ public class TreasureBag : MonoBehaviour {
 					}
 
 					case 4: {
-						ray = Physics2D.Raycast(new Vector2(transform.position.x + playerRadius, transform.position.y), Vector2.right);
+						ray = Physics2D.Raycast(new Vector2(transform.position.x + playerRadius, transform.position.y), Vector2.right, 0.9f);
 
 						if (!ray.collider) {
 							Instantiate(coin, new Vector2(transform.position.x + 1, transform.position.y), Quaternion.identity);
 							--coinsCollected;
 							scoreController.GetComponent<ScoreController>().DecreaseScore(gameObject.name, 10);
+							i += 4;
+						} else {
 							++i;
 						}
 

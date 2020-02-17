@@ -22,40 +22,40 @@ public class PlayerMovement : MonoBehaviour {
 	private bool canJump = true;
 
 	private void FixedUpdate() {
-		if (Input.GetAxis(controllerPrefix + "Vertical") == 0) {
+		if (Input.GetAxis(controllerPrefix + "Vertical") == 0.0f) {
 			canMoveVertically = true;
 		}
 
-		if (Input.GetAxis(controllerPrefix + "Horizontal") == 0) {
+		if (Input.GetAxis(controllerPrefix + "Horizontal") == 0.0f) {
 			canMoveHorizontally = true;
 		}
 
-		if (Input.GetAxis(controllerPrefix + "Jump") == 0) {
+		if (Input.GetAxis(controllerPrefix + "Jump") == 0.0f) {
 			canJump = true;
 		}
 
 		// Checks for player input.
-		if ((Input.GetAxis(controllerPrefix + "Vertical") > 0) && (canMoveVertically)) {
+		if ((Input.GetAxis(controllerPrefix + "Vertical") > 0.0f) && (canMoveVertically)) {
 			CheckMoveDirection(Direction.Up);
 			canMoveVertically = false;
 		}
 
-		if ((Input.GetAxis(controllerPrefix + "Horizontal") < 0) && (canMoveHorizontally)) {
+		if ((Input.GetAxis(controllerPrefix + "Horizontal") < 0.0f) && (canMoveHorizontally)) {
 			CheckMoveDirection(Direction.Left);
 			canMoveHorizontally = false;
 		}
 
-		if ((Input.GetAxis(controllerPrefix + "Vertical") < 0) && (canMoveVertically)) {
+		if ((Input.GetAxis(controllerPrefix + "Vertical") < 0.0f) && (canMoveVertically)) {
 			CheckMoveDirection(Direction.Down);
 			canMoveVertically = false;
 		}
 
-		if ((Input.GetAxis(controllerPrefix + "Horizontal") > 0) && (canMoveHorizontally)) {
+		if ((Input.GetAxis(controllerPrefix + "Horizontal") > 0.0f) && (canMoveHorizontally)) {
 			CheckMoveDirection(Direction.Right);
 			canMoveHorizontally = false;
 		}
 
-		if ((Input.GetAxis(controllerPrefix + "Jump") > 0) && (canJump))
+		if ((Input.GetAxis(controllerPrefix + "Jump") > 0.0f) && (canJump))
 		{
 			CheckMoveDirection(Direction.Jump);
 			canJump = false;

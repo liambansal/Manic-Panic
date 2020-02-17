@@ -2,9 +2,11 @@
 
 public class PlayerPunching : MonoBehaviour {
 	[SerializeField]
-	private string controllerPrefix = "";
+	private string controllerPrefix = ""; // Used to identify the player.
 
 	private const float playerRadius = 0.5f;
+	private const float cooldownLength = 4.0f; // Cooldown length for punching.
+	private float punchCooldown = 0.0f; // Time remaining before player can punch.
 
 	private bool canPunch = true;
 
@@ -12,29 +14,34 @@ public class PlayerPunching : MonoBehaviour {
 	private Directions punchDirection;
 
 	private void Update() {
-		if ((Input.GetAxis(controllerPrefix + "FireVertical") == 0) || (Input.GetAxis(controllerPrefix + "FireVertical") == 0)) {
-			canPunch = true;
+		if (!canPunch) {
+			punchCooldown -= Time.deltaTime;
 		}
 
-		if ((Input.GetAxis(controllerPrefix + "FireVertical") < 0) && canPunch) {
+		if (punchCooldown <= 0.0f) {
+			canPunch = true;
+			punchCooldown = cooldownLength;
+		}
+
+		if ((Input.GetAxis(controllerPrefix + "FireVertical") < 0.0f) && canPunch) {
 			punchDirection = Directions.Up;
 			Punch(punchDirection);
 			canPunch = false;
 		}
 
-		if ((Input.GetAxis(controllerPrefix + "FireHorizontal") < 0) && canPunch) {
+		if ((Input.GetAxis(controllerPrefix + "FireHorizontal") < 0.0f) && canPunch) {
 			punchDirection = Directions.Left;
 			Punch(punchDirection);
 			canPunch = false;
 		}
 
-		if ((Input.GetAxis(controllerPrefix + "FireVertical") > 0) && canPunch) {
+		if ((Input.GetAxis(controllerPrefix + "FireVertical") > 0.0f) && canPunch) {
 			punchDirection = Directions.Down;
 			Punch(punchDirection);
 			canPunch = false;
 		}
 
-		if ((Input.GetAxis(controllerPrefix + "FireHorizontal") > 0) && canPunch) {
+		if ((Input.GetAxis(controllerPrefix + "FireHorizontal") > 0.0f) && canPunch) {
 			punchDirection = Directions.Right;
 			Punch(punchDirection);
 			canPunch = false;
