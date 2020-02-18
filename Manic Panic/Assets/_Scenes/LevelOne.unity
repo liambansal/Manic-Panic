@@ -10081,7 +10081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &787694935
 Transform:
   m_ObjectHideFlags: 0
@@ -11744,6 +11744,8 @@ GameObject:
   - component: {fileID: 1016092333}
   - component: {fileID: 1016092335}
   - component: {fileID: 1016092334}
+  - component: {fileID: 1016092337}
+  - component: {fileID: 1016092336}
   m_Layer: 5
   m_Name: Win Text
   m_TagString: Untagged
@@ -11812,6 +11814,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1016092332}
   m_CullTransparentMesh: 0
+--- !u!114 &1016092336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016092332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49be5f02e289d5479f5b1cab178630d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &1016092337
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016092332}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0b91a440a5cc7034ab1dc11d483468ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1066090925 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3922093559215771605, guid: 86e5071a7628c5649a7f19fb0ff41600,
@@ -14399,6 +14432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreController: {fileID: 265591979}
+  winScreen: {fileID: 1016092332}
   deathScreenOne: {fileID: 1860919888}
   deathScreenTwo: {fileID: 1779717285}
   winTextbox: {fileID: 1016092334}

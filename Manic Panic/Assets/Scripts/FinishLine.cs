@@ -7,6 +7,9 @@ public class FinishLine : MonoBehaviour {
 	private ScoreController scoreController = null;
 
 	[SerializeField]
+	private GameObject winScreen = null;
+
+	[SerializeField]
 	private GameObject deathScreenOne = null;
 	[SerializeField]
 	private GameObject deathScreenTwo = null;
@@ -36,7 +39,10 @@ public class FinishLine : MonoBehaviour {
 	private void DisplayWinner() {
 		if (playersFinished == playersAlive) {
 			Time.timeScale = 0;
+			deathScreenOne.SetActive(false);
+			deathScreenTwo.SetActive(false);
 			winTextbox.text = scoreController.CompareScore(players);
+			winScreen.GetComponent<Animator>().SetBool("loadScene", true);
 		}
 	}
 

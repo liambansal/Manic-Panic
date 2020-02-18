@@ -15,7 +15,6 @@ public class Player : MonoBehaviour {
 	private enum MoveDirections { Up, Left, Down, Right, Jump };
 	private enum PunchDirections { Up, Left, Down, Right };
 
-	// Tiles to move.
 	private const int moveDistance = 1;
 	private const int jumpDistance = 2;
 	private const int layerMask = 1 << 8;
@@ -35,28 +34,31 @@ public class Player : MonoBehaviour {
 	private bool stunned = false;
 
 	private void Update() {
-		if (Input.GetAxis(controllerPrefix + "Vertical") == 0.0f) {
-			canMoveVertically = true;
-		}
+		if (!stunned) {
+			if (Input.GetAxis(controllerPrefix + "Vertical") == 0.0f) {
+				canMoveVertically = true;
+			}
 
-		if (Input.GetAxis(controllerPrefix + "Horizontal") == 0.0f) {
-			canMoveHorizontally = true;
-		}
+			if (Input.GetAxis(controllerPrefix + "Horizontal") == 0.0f) {
+				canMoveHorizontally = true;
+			}
 
-		if (Input.GetAxis(controllerPrefix + "Jump") == 0.0f) {
-			canJump = true;
-		}
+			if (Input.GetAxis(controllerPrefix + "Jump") == 0.0f) {
+				canJump = true;
+			}
 
-		if (!canPunch) {
-			punchCooldown -= Time.deltaTime;
-		}
+			if (!canPunch) {
+				punchCooldown -= Time.deltaTime;
+			}
 
-		if (punchCooldown <= 0.0f) {
-			canPunch = true;
-			punchCooldown = punchCooldownLength;
-		}
-
-		if (stunned) {
+			if (punchCooldown <= 0.0f) {
+				canPunch = true;
+				punchCooldown = punchCooldownLength;
+			}
+		} else if (stunned) {
+			canMoveVertically = false;
+			canMoveHorizontally = false;
+			canJump = false;
 			canPunch = false;
 			stunTimer -= Time.deltaTime;
 			// TODO: Play stun animation. + Enable movement once animation has finished.
@@ -64,9 +66,7 @@ public class Player : MonoBehaviour {
 
 		if (stunTimer <= 0) {
 			stunned = false;
-			gameObject.SendMessage("EnableMovement");
 			gameObject.GetComponent<SpriteRenderer>().sprite = playerSprite;
-			canPunch = true;
 			stunTimer = stunLength;
 		}
 
@@ -320,18 +320,7 @@ public class Player : MonoBehaviour {
 
 	private void Stunned() {
 		stunned = true;
-		DisableMovement();
 		gameObject.GetComponent<SpriteRenderer>().sprite = uiBox; // TODO: delete line once animation is in place
 		gameObject.SendMessage("DropTreasure");
-	}
-
-	private void EnableMovement() {
-		canMoveHorizontally = true;
-		canMoveVertically = true;
-	}
-
-	private void DisableMovement() {
-		canMoveHorizontally = false;
-		canMoveVertically = false;
 	}
 }
