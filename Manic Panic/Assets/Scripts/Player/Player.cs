@@ -1,13 +1,19 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class Player : MonoBehaviour {
 	[SerializeField]
 	private string controllerPrefix = "";
 
 	[SerializeField]
 	private GameObject movePosition = null;
 
-	private enum Direction { Up, Left, Down, Right, Jump };
+	[SerializeField]
+	private Sprite uiBox = null;
+	[SerializeField]
+	private Sprite playerSprite = null;
+
+	private enum MoveDirections { Up, Left, Down, Right, Jump };
+	private enum PunchDirections { Up, Left, Down, Right };
 
 	// Tiles to move.
 	private const int moveDistance = 1;
@@ -16,12 +22,19 @@ public class PlayerMovement : MonoBehaviour {
 
 	private const float playerRadius = 0.5f;
 	private const float raycastDistance = 0.9f;
+	private const float punchCooldownLength = 4.0f; // Cooldown length for punching.
+	private const float stunLength = 2.0f;
+
+	private float punchCooldown = 0.0f; // Time remaining before player can punch.
+	private float stunTimer = 2.0f;
 
 	private bool canMoveVertically = true;
 	private bool canMoveHorizontally = true;
 	private bool canJump = true;
+	private bool canPunch = true;
+	private bool stunned = false;
 
-	private void FixedUpdate() {
+	private void Update() {
 		if (Input.GetAxis(controllerPrefix + "Vertical") == 0.0f) {
 			canMoveVertically = true;
 		}
@@ -34,31 +47,74 @@ public class PlayerMovement : MonoBehaviour {
 			canJump = true;
 		}
 
-		// Checks for player input.
+		if (!canPunch) {
+			punchCooldown -= Time.deltaTime;
+		}
+
+		if (punchCooldown <= 0.0f) {
+			canPunch = true;
+			punchCooldown = punchCooldownLength;
+		}
+
+		if (stunned) {
+			canPunch = false;
+			stunTimer -= Time.deltaTime;
+			// TODO: Play stun animation. + Enable movement once animation has finished.
+		}
+
+		if (stunTimer <= 0) {
+			stunned = false;
+			gameObject.SendMessage("EnableMovement");
+			gameObject.GetComponent<SpriteRenderer>().sprite = playerSprite;
+			canPunch = true;
+			stunTimer = stunLength;
+		}
+
+		// Checks input for moving.
 		if ((Input.GetAxis(controllerPrefix + "Vertical") > 0.0f) && (canMoveVertically)) {
-			CheckMoveDirection(Direction.Up);
+			CheckMoveDirection(MoveDirections.Up);
 			canMoveVertically = false;
 		}
 
 		if ((Input.GetAxis(controllerPrefix + "Horizontal") < 0.0f) && (canMoveHorizontally)) {
-			CheckMoveDirection(Direction.Left);
+			CheckMoveDirection(MoveDirections.Left);
 			canMoveHorizontally = false;
 		}
 
 		if ((Input.GetAxis(controllerPrefix + "Vertical") < 0.0f) && (canMoveVertically)) {
-			CheckMoveDirection(Direction.Down);
+			CheckMoveDirection(MoveDirections.Down);
 			canMoveVertically = false;
 		}
 
 		if ((Input.GetAxis(controllerPrefix + "Horizontal") > 0.0f) && (canMoveHorizontally)) {
-			CheckMoveDirection(Direction.Right);
+			CheckMoveDirection(MoveDirections.Right);
 			canMoveHorizontally = false;
 		}
 
-		if ((Input.GetAxis(controllerPrefix + "Jump") > 0.0f) && (canJump))
-		{
-			CheckMoveDirection(Direction.Jump);
+		if ((Input.GetAxis(controllerPrefix + "Jump") > 0.0f) && (canJump)) {
+			CheckMoveDirection(MoveDirections.Jump);
 			canJump = false;
+		}
+
+		// Check input for punching.
+		if ((Input.GetAxis(controllerPrefix + "FireVertical") < 0.0f) && canPunch) {
+			Punch(PunchDirections.Up);
+			canPunch = false;
+		}
+
+		if ((Input.GetAxis(controllerPrefix + "FireHorizontal") < 0.0f) && canPunch) {
+			Punch(PunchDirections.Left);
+			canPunch = false;
+		}
+
+		if ((Input.GetAxis(controllerPrefix + "FireVertical") > 0.0f) && canPunch) {
+			Punch(PunchDirections.Down);
+			canPunch = false;
+		}
+
+		if ((Input.GetAxis(controllerPrefix + "FireHorizontal") > 0.0f) && canPunch) {
+			Punch(PunchDirections.Right);
+			canPunch = false;
 		}
 	}
 
@@ -66,12 +122,12 @@ public class PlayerMovement : MonoBehaviour {
 	/// Checks if the character can move in the desired direction then calls a method to move.
 	/// </summary>
 	/// <param name="moveDirection"> The direction to move. </param>
-	private void CheckMoveDirection (Direction moveDirection) {
+	private void CheckMoveDirection(MoveDirections moveDirection) {
 		// Used for checking objects around the player.
 		RaycastHit2D ray;
 
 		switch (moveDirection) {
-			case Direction.Up: {
+			case MoveDirections.Up: {
 				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + playerRadius), Vector2.up, raycastDistance, layerMask);
 
 				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Move Position"))) {
@@ -83,7 +139,7 @@ public class PlayerMovement : MonoBehaviour {
 
 				break;
 			}
-			case Direction.Left: {
+			case MoveDirections.Left: {
 				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x - playerRadius, gameObject.transform.position.y), Vector2.left, raycastDistance, layerMask);
 
 				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Move Position"))) {
@@ -95,7 +151,7 @@ public class PlayerMovement : MonoBehaviour {
 
 				break;
 			}
-			case Direction.Down: {
+			case MoveDirections.Down: {
 				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - playerRadius), Vector2.down, raycastDistance, layerMask);
 
 				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Move Position"))) {
@@ -107,7 +163,7 @@ public class PlayerMovement : MonoBehaviour {
 
 				break;
 			}
-			case Direction.Right: {
+			case MoveDirections.Right: {
 				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + playerRadius, gameObject.transform.position.y), Vector2.right, raycastDistance, layerMask);
 
 				if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Move Position"))) {
@@ -119,7 +175,7 @@ public class PlayerMovement : MonoBehaviour {
 
 				break;
 			}
-			case Direction.Jump: {
+			case MoveDirections.Jump: {
 				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + playerRadius), Vector2.up, raycastDistance, layerMask);
 
 				if (!ray.collider || !ray.collider.CompareTag("Wall")) {
@@ -135,29 +191,29 @@ public class PlayerMovement : MonoBehaviour {
 	/// Moves the character and its move collider in the desired direction.
 	/// </summary>
 	/// <param name="moveDirection"> The direction to move. </param>
-	private void Move(Direction moveDirection) {
+	private void Move(MoveDirections moveDirection) {
 		switch (moveDirection) {
-			case Direction.Up: {
+			case MoveDirections.Up: {
 				gameObject.transform.Translate((Vector2.up * moveDistance), Space.World);
 				movePosition.transform.localPosition = Vector2.zero;
 				break;
 			}
-			case Direction.Left: {
+			case MoveDirections.Left: {
 				gameObject.transform.Translate((Vector2.left * moveDistance), Space.World);
 				movePosition.transform.localPosition = Vector2.zero;
 				break;
 			}
-			case Direction.Down: {
+			case MoveDirections.Down: {
 				gameObject.transform.Translate((Vector2.down * moveDistance), Space.World);
 				movePosition.transform.localPosition = Vector2.zero;
 				break;
 			}
-			case Direction.Right: {
+			case MoveDirections.Right: {
 				gameObject.transform.Translate((Vector2.right * moveDistance), Space.World);
 				movePosition.transform.localPosition = Vector2.zero;
 				break;
 			}
-			case Direction.Jump: {
+			case MoveDirections.Jump: {
 				gameObject.transform.Translate((Vector2.up * jumpDistance), Space.World);
 				break;
 			}
@@ -168,11 +224,11 @@ public class PlayerMovement : MonoBehaviour {
 	/// Pushes an object in the direction the player is trying to move, then moves the character into its place.
 	/// </summary>
 	/// <param name="pushDirection"> The direction to push. </param>
-	private void Push(Direction pushDirection, RaycastHit2D pushObject) {
+	private void Push(MoveDirections pushDirection, RaycastHit2D pushObject) {
 		RaycastHit2D ray;
 
 		switch (pushDirection) {
-			case Direction.Up: {
+			case MoveDirections.Up: {
 				ray = Physics2D.Raycast(new Vector2(pushObject.transform.position.x, pushObject.transform.position.y + playerRadius), Vector2.up, raycastDistance, layerMask);
 
 				if ((!ray.collider) || (!ray.collider.CompareTag("Wall"))) {
@@ -182,7 +238,7 @@ public class PlayerMovement : MonoBehaviour {
 
 				break;
 			}
-			case Direction.Left: {
+			case MoveDirections.Left: {
 				ray = Physics2D.Raycast(new Vector2(pushObject.transform.position.x - playerRadius, pushObject.transform.position.y), Vector2.left, raycastDistance, layerMask);
 
 				if ((!ray.collider) || (!ray.collider.CompareTag("Wall"))) {
@@ -192,7 +248,7 @@ public class PlayerMovement : MonoBehaviour {
 
 				break;
 			}
-			case Direction.Down: {
+			case MoveDirections.Down: {
 				ray = Physics2D.Raycast(new Vector2(pushObject.transform.position.x, pushObject.transform.position.y - playerRadius), Vector2.down, raycastDistance, layerMask);
 
 				if ((!ray.collider) || (!ray.collider.CompareTag("Wall"))) {
@@ -202,7 +258,7 @@ public class PlayerMovement : MonoBehaviour {
 
 				break;
 			}
-			case Direction.Right: {
+			case MoveDirections.Right: {
 				ray = Physics2D.Raycast(new Vector2(pushObject.transform.position.x + playerRadius, pushObject.transform.position.y), Vector2.right, raycastDistance, layerMask);
 
 				if ((!ray.collider) || (!ray.collider.CompareTag("Wall"))) {
@@ -213,6 +269,60 @@ public class PlayerMovement : MonoBehaviour {
 				break;
 			}
 		}
+	}
+
+	private void Punch(PunchDirections punchDirection) {
+		RaycastHit2D ray;
+
+		switch (punchDirection) {
+			case PunchDirections.Up: {
+				ray = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + playerRadius), Vector2.up, raycastDistance, layerMask);
+
+				if (ray.collider && ray.collider.gameObject.CompareTag("Player")) {
+					// TODO: Play punch animation.
+					ray.collider.gameObject.SendMessage("Stunned");
+				}
+
+				break;
+			}
+			case PunchDirections.Left: {
+				ray = Physics2D.Raycast(new Vector2(transform.position.x - playerRadius, transform.position.y), Vector2.left, raycastDistance, layerMask);
+
+				if (ray.collider && ray.collider.gameObject.CompareTag("Player")) {
+					// TODO: Play punch animation.
+					ray.collider.gameObject.SendMessage("Stunned");
+				}
+
+				break;
+			}
+			case PunchDirections.Down: {
+				ray = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - playerRadius), Vector2.down, raycastDistance, layerMask);
+
+				if (ray.collider && ray.collider.gameObject.CompareTag("Player")) {
+					// TODO: Play punch animation.
+					ray.collider.gameObject.SendMessage("Stunned");
+				}
+
+				break;
+			}
+			case PunchDirections.Right: {
+				ray = Physics2D.Raycast(new Vector2(transform.position.x + playerRadius, transform.position.y), Vector2.right, raycastDistance, layerMask);
+
+				if (ray.collider && ray.collider.gameObject.CompareTag("Player")) {
+					// TODO: Play punch animation.
+					ray.collider.gameObject.SendMessage("Stunned");
+				}
+
+				break;
+			}
+		}
+	}
+
+	private void Stunned() {
+		stunned = true;
+		DisableMovement();
+		gameObject.GetComponent<SpriteRenderer>().sprite = uiBox; // TODO: delete line once animation is in place
+		gameObject.SendMessage("DropTreasure");
 	}
 
 	private void EnableMovement() {

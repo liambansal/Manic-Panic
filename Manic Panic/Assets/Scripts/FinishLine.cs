@@ -7,6 +7,11 @@ public class FinishLine : MonoBehaviour {
 	private ScoreController scoreController = null;
 
 	[SerializeField]
+	private GameObject deathScreenOne = null;
+	[SerializeField]
+	private GameObject deathScreenTwo = null;
+
+	[SerializeField]
 	private Text winTextbox = null;
 
 	private int playersFinished = 0;
@@ -39,6 +44,15 @@ public class FinishLine : MonoBehaviour {
 		if (players.Contains(player)) {
 			players.Remove(player);
 			--playersAlive;
+
+			if (player == "Player One") {
+				deathScreenOne.SetActive(true);
+				deathScreenOne.GetComponent<Animator>().SetBool("fadeIn", true);
+			} else if (player == "Player Two") {
+				deathScreenTwo.SetActive(true);
+				deathScreenTwo.GetComponent<Animator>().SetBool("fadeIn", true);
+			}
+
 			DisplayWinner();
 		}
 	}

@@ -69,9 +69,7 @@ GameObject:
   - component: {fileID: 4660086462708120175}
   - component: {fileID: 4660086462708120160}
   - component: {fileID: 4660086462708120161}
-  - component: {fileID: 4660086462708120172}
-  - component: {fileID: 247808309}
-  - component: {fileID: 1959926689199174127}
+  - component: {fileID: 8371060583825092678}
   - component: {fileID: -1835464688364819133}
   m_Layer: 8
   m_Name: Player Two
@@ -190,7 +188,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
---- !u!114 &4660086462708120172
+--- !u!114 &8371060583825092678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,36 +197,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4660086462708120173}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16de18265e6c75b45bce6cc5a339d03a, type: 3}
+  m_Script: {fileID: 11500000, guid: 188fb79b0ebf739468d3285dc6091496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   controllerPrefix: P2
   movePosition: {fileID: 3244000822670906204}
---- !u!114 &247808309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4660086462708120173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baca02404b51cd047a982956688c97fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controllerPrefix: P2
---- !u!114 &1959926689199174127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4660086462708120173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cae3e8a0f03b3d64f9bb632c617c5837, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   uiBox: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   playerSprite: {fileID: 21300000, guid: 6a6d8ac4d4756e342992123c9cfa6bc6, type: 3}
 --- !u!114 &-1835464688364819133
@@ -244,3 +217,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coin: {fileID: 3922093559215771625, guid: 86e5071a7628c5649a7f19fb0ff41600, type: 3}
+  scoreController: {fileID: 0}
