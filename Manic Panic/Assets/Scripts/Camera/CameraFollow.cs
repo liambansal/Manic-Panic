@@ -5,10 +5,10 @@ public class CameraFollow : MonoBehaviour {
 	private int moveForce = 1;
 
 	[SerializeField]
-	private GameObject player = null;
+	private string playerNumber = "";
 
 	[SerializeField]
-	private string playerNumber = "";
+	private GameObject player = null;
 
 	private Rigidbody2D cameraRigidbody;
 

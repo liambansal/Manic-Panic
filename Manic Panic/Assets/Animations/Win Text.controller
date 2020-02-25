@@ -34,7 +34,7 @@ AnimatorController:
   m_Name: Win Text
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: loadScene
+  - m_Name: playAnimation
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -115,7 +115,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: loadScene
+    m_ConditionEvent: playAnimation
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4505998939327036764}

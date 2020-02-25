@@ -7,9 +7,6 @@ public class FinishLine : MonoBehaviour {
 	private ScoreController scoreController = null;
 
 	[SerializeField]
-	private GameObject winScreen = null;
-
-	[SerializeField]
 	private GameObject deathScreenOne = null;
 	[SerializeField]
 	private GameObject deathScreenTwo = null;
@@ -21,6 +18,8 @@ public class FinishLine : MonoBehaviour {
 	private int playersAlive = 2;
 
 	private LinkedList<string> players = new LinkedList<string> { };
+
+	private Time animationTimeline;
 
 	private void Start() {
 		foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) {
@@ -38,11 +37,11 @@ public class FinishLine : MonoBehaviour {
 
 	private void DisplayWinner() {
 		if (playersFinished == playersAlive) {
-			Time.timeScale = 0;
 			deathScreenOne.SetActive(false);
 			deathScreenTwo.SetActive(false);
+			winTextbox.gameObject.SetActive(true);
 			winTextbox.text = scoreController.CompareScore(players);
-			winScreen.GetComponent<Animator>().SetBool("loadScene", true);
+			winTextbox.GetComponent<Animator>().SetBool("playAnimation", true);
 		}
 	}
 
