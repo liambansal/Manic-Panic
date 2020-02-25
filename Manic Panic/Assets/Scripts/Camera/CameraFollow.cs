@@ -16,9 +16,11 @@ public class CameraFollow : MonoBehaviour {
 		cameraRigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate() {
+    private void Update() {
 		if (GameObject.Find("Player " + playerNumber)) {
 			MoveCamera();
+		} else {
+			cameraRigidbody.velocity = Vector2.zero;
 		}
 	}
 

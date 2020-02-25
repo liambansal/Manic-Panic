@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DangerColliderZone : MonoBehaviour {
+public class Hazard : MonoBehaviour {
 	[SerializeField]
 	private FinishLine finishLine = null;
 

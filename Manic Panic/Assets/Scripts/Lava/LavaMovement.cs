@@ -6,13 +6,19 @@ public class LavaMovement : MonoBehaviour {
 
 	private Rigidbody2D lavaRigidbody = null;
 
-	private float deltaTime;
-
 	private void Start() {
 		lavaRigidbody = gameObject.GetComponent<Rigidbody2D>();
 	}
 
 	private void FixedUpdate() {
-		lavaRigidbody.AddForce((Vector2.up * Time.deltaTime * movementSpeed), ForceMode2D.Force);
+		if (GameObject.FindGameObjectWithTag("Player")) {
+			MoveUpwards();
+		} else {
+			lavaRigidbody.velocity = Vector2.zero;
+		}
     }
+
+	private void MoveUpwards() {
+		lavaRigidbody.AddForce((Vector2.up * Time.deltaTime * movementSpeed), ForceMode2D.Force);
+	}
 }
