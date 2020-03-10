@@ -10,12 +10,16 @@ public class FinishLine : MonoBehaviour {
 	private GameObject deathScreenOne = null;
 	[SerializeField]
 	private GameObject deathScreenTwo = null;
+	[SerializeField]
+	private GameObject deathScreenThree = null;
+	[SerializeField]
+	private GameObject deathScreenFour = null;
 
 	[SerializeField]
 	private Text winTextbox = null;
 
 	private int playersFinished = 0;
-	private int playersAlive = 2;
+	private int playersAlive = 4;
 
 	private LinkedList<string> players = new LinkedList<string> { };
 
@@ -28,7 +32,7 @@ public class FinishLine : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
-		if ((other.gameObject.name == "Player One") || (other.gameObject.name == "Player Two")) {
+		if ((other.gameObject.name == "Player One") || (other.gameObject.name == "Player Two") || (other.gameObject.name == "Player Three") || (other.gameObject.name == "Player Four")) {
 			Destroy(other.gameObject);
 			++playersFinished;
 			DisplayWinner();
@@ -39,6 +43,8 @@ public class FinishLine : MonoBehaviour {
 		if (playersFinished == playersAlive) {
 			deathScreenOne.SetActive(false);
 			deathScreenTwo.SetActive(false);
+			deathScreenThree.SetActive(false);
+			deathScreenFour.SetActive(false);
 			winTextbox.gameObject.SetActive(true);
 			winTextbox.text = scoreController.CompareScore(players);
 			winTextbox.GetComponent<Animator>().SetBool("playAnimation", true);
@@ -56,6 +62,12 @@ public class FinishLine : MonoBehaviour {
 			} else if (player == "Player Two") {
 				deathScreenTwo.SetActive(true);
 				deathScreenTwo.GetComponent<Animator>().SetBool("fadeIn", true);
+			} else if (player == "Player Three") {
+				deathScreenThree.SetActive(true);
+				deathScreenThree.GetComponent<Animator>().SetBool("fadeIn", true);
+			} else if (player == "Player Four") {
+				deathScreenFour.SetActive(true);
+				deathScreenFour.GetComponent<Animator>().SetBool("fadeIn", true);
 			}
 
 			DisplayWinner();
