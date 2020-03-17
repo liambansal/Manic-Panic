@@ -150,6 +150,22 @@ InputManager:
     axis: 0
     joyNum: 1
   - serializedVersion: 3
+    m_Name: P1Horizontal2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.19
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 5
+    joyNum: 1
+  - serializedVersion: 3
     m_Name: P2Horizontal
     descriptiveName: 
     descriptiveNegativeName: 
@@ -164,6 +180,22 @@ InputManager:
     invert: 0
     type: 2
     axis: 0
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: P2Horizontal2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.19
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 5
     joyNum: 2
   - serializedVersion: 3
     m_Name: P3Horizontal
@@ -182,6 +214,22 @@ InputManager:
     axis: 0
     joyNum: 3
   - serializedVersion: 3
+    m_Name: P3Horizontal2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.19
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 5
+    joyNum: 3
+  - serializedVersion: 3
     m_Name: P4Horizontal
     descriptiveName: 
     descriptiveNegativeName: 
@@ -196,6 +244,22 @@ InputManager:
     invert: 0
     type: 2
     axis: 0
+    joyNum: 4
+  - serializedVersion: 3
+    m_Name: P4Horizontal2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.19
+    sensitivity: 1
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 5
     joyNum: 4
   - serializedVersion: 3
     m_Name: P1Vertical
@@ -214,6 +278,22 @@ InputManager:
     axis: 1
     joyNum: 1
   - serializedVersion: 3
+    m_Name: P1Vertical2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.19
+    sensitivity: 1
+    snap: 0
+    invert: 1
+    type: 2
+    axis: 6
+    joyNum: 1
+  - serializedVersion: 3
     m_Name: P2Vertical
     descriptiveName: 
     descriptiveNegativeName: 
@@ -228,6 +308,22 @@ InputManager:
     invert: 1
     type: 2
     axis: 1
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: P2Vertical2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.19
+    sensitivity: 1
+    snap: 0
+    invert: 1
+    type: 2
+    axis: 6
     joyNum: 2
   - serializedVersion: 3
     m_Name: P3Vertical
@@ -246,6 +342,22 @@ InputManager:
     axis: 1
     joyNum: 3
   - serializedVersion: 3
+    m_Name: P3Vertical2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.19
+    sensitivity: 1
+    snap: 0
+    invert: 1
+    type: 2
+    axis: 6
+    joyNum: 3
+  - serializedVersion: 3
     m_Name: P4Vertical
     descriptiveName: 
     descriptiveNegativeName: 
@@ -260,6 +372,22 @@ InputManager:
     invert: 1
     type: 2
     axis: 1
+    joyNum: 4
+  - serializedVersion: 3
+    m_Name: P4Vertical2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.19
+    sensitivity: 1
+    snap: 0
+    invert: 1
+    type: 2
+    axis: 6
     joyNum: 4
   - serializedVersion: 3
     m_Name: P1FireHorizontal

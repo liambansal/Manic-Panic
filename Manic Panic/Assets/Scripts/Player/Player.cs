@@ -23,28 +23,31 @@ public class Player : MonoBehaviour {
 	private const float raycastDistance = 0.9f;
 	private const float punchCooldownLength = 4.0f; // Cooldown length for punching.
 	private const float stunLength = 2.0f;
+	private const float moveCooldown = 0.25f;
 
 	private float punchCooldown = 0.0f; // Time remaining before player can punch.
 	private float stunTimer = 2.0f;
+	private float moveTimer = 0.25f;
 
 	private bool canMoveVertically = true;
 	private bool canMoveHorizontally = true;
+	private bool moved = false; // Tells us whether or not the player has moved.
 	private bool canJump = true;
 	private bool canPunch = true;
 	private bool stunned = false;
 
 	private void Update() {
 		if (!stunned) {
-			if (Input.GetAxis(controllerPrefix + "Vertical") == 0.0f) {
+			if (moved) {
+				moveTimer -= Time.deltaTime;
+			}
+
+			if (/*Input.GetAxis(controllerPrefix + "Vertical") == 0.0f*/moveTimer <= 0.0f) {
+				moved = false;
 				canMoveVertically = true;
-			}
-
-			if (Input.GetAxis(controllerPrefix + "Horizontal") == 0.0f) {
 				canMoveHorizontally = true;
-			}
-
-			if (Input.GetAxis(controllerPrefix + "Jump") == 0.0f) {
 				canJump = true;
+				moveTimer = moveCooldown;
 			}
 
 			if (!canPunch) {
@@ -64,55 +67,52 @@ public class Player : MonoBehaviour {
 			// TODO: Play stun animation. + Enable movement once animation has finished.
 		}
 
-		if (stunTimer <= 0) {
+		if (stunTimer <= 0.0f) {
 			stunned = false;
 			gameObject.GetComponent<SpriteRenderer>().sprite = playerSprite;
 			stunTimer = stunLength;
 		}
 
 		// Checks input for moving.
-		if ((Input.GetAxis(controllerPrefix + "Vertical") > 0.0f) && (canMoveVertically)) {
+		if (((Input.GetAxis(controllerPrefix + "Vertical2") < 0.0f) || (Input.GetAxis(controllerPrefix + "Vertical") > 0.0f)) && canMoveVertically && !moved) {
 			CheckMoveDirection(MoveDirections.Up);
 			canMoveVertically = false;
-		}
-
-		if ((Input.GetAxis(controllerPrefix + "Horizontal") < 0.0f) && (canMoveHorizontally)) {
-			CheckMoveDirection(MoveDirections.Left);
-			canMoveHorizontally = false;
-		}
-
-		if ((Input.GetAxis(controllerPrefix + "Vertical") < 0.0f) && (canMoveVertically)) {
+			moved = true;
+		} else if (((Input.GetAxis(controllerPrefix + "Vertical2") > 0.0f) || (Input.GetAxis(controllerPrefix + "Vertical") < 0.0f)) && canMoveVertically && !moved) {
 			CheckMoveDirection(MoveDirections.Down);
 			canMoveVertically = false;
+			moved = true;
 		}
 
-		if ((Input.GetAxis(controllerPrefix + "Horizontal") > 0.0f) && (canMoveHorizontally)) {
+		if (((Input.GetAxis(controllerPrefix + "Horizontal2") < 0.0f) || (Input.GetAxis(controllerPrefix + "Horizontal")) < 0.0f) && canMoveHorizontally && !moved) {
+			CheckMoveDirection(MoveDirections.Left);
+			canMoveHorizontally = false;
+			moved = true;
+		} else if (((Input.GetAxis(controllerPrefix + "Horizontal2") > 0.0f) || (Input.GetAxis(controllerPrefix + "Horizontal") > 0.0f)) && canMoveHorizontally && !moved) {
 			CheckMoveDirection(MoveDirections.Right);
 			canMoveHorizontally = false;
+			moved = true;
 		}
 
-		if ((Input.GetAxis(controllerPrefix + "Jump") > 0.0f) && (canJump)) {
+		if ((Input.GetAxis(controllerPrefix + "Jump") > 0.0f) && canJump && !moved) {
 			CheckMoveDirection(MoveDirections.Jump);
 			canJump = false;
+			moved = true;
 		}
 
 		// Check input for punching.
 		if ((Input.GetAxis(controllerPrefix + "FireVertical") < 0.0f) && canPunch) {
 			Punch(PunchDirections.Up);
 			canPunch = false;
+		} else if ((Input.GetAxis(controllerPrefix + "FireVertical") > 0.0f) && canPunch) {
+			Punch(PunchDirections.Down);
+			canPunch = false;
 		}
 
 		if ((Input.GetAxis(controllerPrefix + "FireHorizontal") < 0.0f) && canPunch) {
 			Punch(PunchDirections.Left);
 			canPunch = false;
-		}
-
-		if ((Input.GetAxis(controllerPrefix + "FireVertical") > 0.0f) && canPunch) {
-			Punch(PunchDirections.Down);
-			canPunch = false;
-		}
-
-		if ((Input.GetAxis(controllerPrefix + "FireHorizontal") > 0.0f) && canPunch) {
+		} else if ((Input.GetAxis(controllerPrefix + "FireHorizontal") > 0.0f) && canPunch) {
 			Punch(PunchDirections.Right);
 			canPunch = false;
 		}

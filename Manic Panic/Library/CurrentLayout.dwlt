@@ -111,10 +111,10 @@ MonoBehaviour:
     y: 30
     width: 2560
     height: 1307
-  m_MinSize: {x: 707, y: 494}
-  m_MaxSize: {x: 18002, y: 14044}
+  m_MinSize: {x: 711, y: 494}
+  m_MaxSize: {x: 18006, y: 14044}
   vertical: 0
-  controlID: 3757
+  controlID: 7427
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -136,10 +136,10 @@ MonoBehaviour:
     y: 0
     width: 2005
     height: 1307
-  m_MinSize: {x: 432, y: 494}
-  m_MaxSize: {x: 14002, y: 14044}
+  m_MinSize: {x: 436, y: 494}
+  m_MaxSize: {x: 14006, y: 14044}
   vertical: 1
-  controlID: 3758
+  controlID: 7428
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 222}
   m_MaxSize: {x: 8006, y: 4022}
   vertical: 0
-  controlID: 3759
+  controlID: 7429
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -240,10 +240,10 @@ MonoBehaviour:
     y: 763
     width: 2005
     height: 544
-  m_MinSize: {x: 432, y: 272}
-  m_MaxSize: {x: 14002, y: 10022}
+  m_MinSize: {x: 436, y: 272}
+  m_MaxSize: {x: 14006, y: 10022}
   vertical: 0
-  controlID: 3782
+  controlID: 7466
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -354,17 +354,17 @@ MonoBehaviour:
   m_MaximizeOnPlay: 1
   m_Gizmos: 0
   m_Stats: 0
-  m_SelectedSizes: 07000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_SelectedSizes: 06000000000000000000000000000000000000000000000000000000000000000000000000000000
   m_TargetDisplay: 0
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -960
-    m_HBaseRangeMax: 960
-    m_VBaseRangeMin: -540
-    m_VBaseRangeMax: 540
+    m_HBaseRangeMin: -512
+    m_HBaseRangeMax: 512
+    m_VBaseRangeMin: -384
+    m_VBaseRangeMax: 384
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -384,20 +384,20 @@ MonoBehaviour:
       y: 17
       width: 763
       height: 508
-    m_Scale: {x: 0.39739582, y: 0.3973958}
-    m_Translation: {x: 381.5, y: 253.99998}
+    m_Scale: {x: 0.6614583, y: 0.6614583}
+    m_Translation: {x: 381.5, y: 254}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -960.00006
-      y: -639.16125
-      width: 1920.0001
-      height: 1278.3225
+      x: -576.7559
+      y: -384
+      width: 1153.5118
+      height: 768
     m_MinimalGUI: 1
-  m_defaultScale: 0.39739582
+  m_defaultScale: 0.6614583
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
   m_LastWindowPixelSize: {x: 763, y: 525}
@@ -434,9 +434,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 8cfbffff
+      m_SelectedIDs: e02e0000
+      m_LastClickedID: 12000
+      m_ExpandedIDs: 92faffffa42f0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -496,9 +496,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 356.13312, y: 197.77028, z: -203.07687}
+    m_Target: {x: 18.71053, y: 22.29477, z: -4.859375}
     speed: 2
-    m_Value: {x: 375.9195, y: 206.05463, z: -200.23247}
+    m_Value: {x: 18.71053, y: 22.29477, z: -4.859375}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -523,17 +523,17 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
     zGrid:
-      m_Target: 1
+      m_Target: 0
       speed: 2
-      m_Value: 1
+      m_Value: 0
   m_Rotation:
     m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 754.0918
+    m_Target: 68.198235
     speed: 2
-    m_Value: 789.62494
+    m_Value: 68.198235
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -754,20 +754,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Scripts/Player
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Scripts/Player
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\s1902869\Manic-Panic\Manic Panic
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 1a2d0000
-    m_LastClickedID: 11546
-    m_ExpandedIDs: 00000000d42a00001a2d000000ca9a3b
+    m_SelectedIDs: 142c0000
+    m_LastClickedID: 11284
+    m_ExpandedIDs: 00000000042c0000382e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -795,7 +795,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d42a00001a2d000000ca9a3b
+    m_ExpandedIDs: 00000000042c0000382e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -904,7 +904,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 11846
+  m_LastSelectedObjectID: 12000
 --- !u!114 &22
 MonoBehaviour:
   m_ObjectHideFlags: 52
