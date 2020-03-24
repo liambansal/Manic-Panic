@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
 public class LavaMovement : MonoBehaviour {
-	[SerializeField]
-	private float movementSpeed = 1;
+	private float movementSpeed = 8;
 
 	private Rigidbody2D lavaRigidbody = null;
 

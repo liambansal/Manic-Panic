@@ -149,9 +149,23 @@ public class Player : MonoBehaviour {
 				break;
 			}
 			case MoveDirections.Jump: {
-				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + playerRadius), Vector2.up, raycastDistance, layerMask);
+				// Casts a ray two tiles ahead of the player's position.
+				ray = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + playerRadius), Vector2.up, raycastDistance * 2, layerMask);
 
-				if (!ray.collider || !ray.collider.CompareTag("Wall")) {
+				// If we cast a ray two tiles ahead of the player's position it will return the object first hit by the ray (Which is possibly only one tile ahead of our player's position). 
+				// So, to find out if there's an object two tiles ahead we need to cast from one tile ahead of our player's current position.
+				// Checks if the ray collided with something that isn't a wall/player/obstruction, meaning it clear to move across.
+				if (ray.collider && (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Obstruction"))) {
+					// Casts a ray one tile ahead of our player's position.
+					ray = Physics2D.Raycast(new Vector2(ray.collider.transform.position.x, ray.collider.transform.position.y + (playerRadius * 2)), Vector2.up, raycastDistance, layerMask);
+					
+					// Checks if the tile is clear of obstructions.
+					if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Obstruction"))) {
+						// Moves the player two tiles ahead of their current position.
+						Move(Vector2.up, jumpDistance);
+					}
+				} else if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Obstruction"))) {
+					// Moves the player two tiles ahead of their current position.
 					Move(Vector2.up, jumpDistance);
 				}
 
@@ -159,7 +173,7 @@ public class Player : MonoBehaviour {
 			}
 		}
 
-		if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Move Position"))) {
+		if (!ray.collider || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Move Position") && !ray.collider.CompareTag("Obstruction"))) {
 			movePosition.transform.localPosition = direction;
 			Move(direction, moveDistance);
 		} else if (ray.collider.CompareTag("Player")) {
@@ -207,8 +221,8 @@ public class Player : MonoBehaviour {
 			}
 		}
 
-		if ((!ray.collider) || (!ray.collider.CompareTag("Wall"))) {
-			pushObject.transform.Translate((Vector2.up * moveDistance), Space.World);
+		if ((!ray.collider) || (!ray.collider.CompareTag("Wall") && !ray.collider.CompareTag("Player") && !ray.collider.CompareTag("Obstruction"))) {
+			pushObject.transform.Translate((direction * moveDistance), Space.World);
 			Move(direction, moveDistance);
 		}
 	}
