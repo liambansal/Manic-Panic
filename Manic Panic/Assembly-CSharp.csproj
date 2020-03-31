@@ -60,6 +60,8 @@
      <Compile Include="Assets\Scripts\FinishLine.cs" />
      <Compile Include="Assets\Scripts\Hazard.cs" />
      <Compile Include="Assets\Scripts\Lava\LavaMovement.cs" />
+     <Compile Include="Assets\Scripts\Log.cs" />
+     <Compile Include="Assets\Scripts\LogManager.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />
      <Compile Include="Assets\Scripts\Player\TreasureBag.cs" />
      <Compile Include="Assets\Scripts\ScoreController.cs" />
