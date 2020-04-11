@@ -2,6 +2,9 @@
 using UnityEngine.Tilemaps;
 
 public class Log : MonoBehaviour {
+	[SerializeField]
+	private FinishLine finishLine = null;
+
 	private const int speed = 8;
 
 	private Vector2 moveDirection;
@@ -15,6 +18,7 @@ public class Log : MonoBehaviour {
 		// Get the map's wall collider before ignoring collisions with it.
 		wallCollider = GameObject.FindWithTag("Wall").GetComponent<TilemapCollider2D>();
 		Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), wallCollider);
+		finishLine = GameObject.FindWithTag("FinishLine").GetComponent<FinishLine>();
 		rb = GetComponent<Rigidbody2D>();
 		// Stores the position the object was spawned at.
 		spawnPosition = transform.position;
@@ -27,6 +31,11 @@ public class Log : MonoBehaviour {
 	private void Update() {
 		// Checks if the object is more than the maps width away from its spawn position.
 		if (Vector2.Distance(transform.position, spawnPosition) >= 20.0f) {
+			// Checks if the log has a player as a child.
+			if (gameObject.GetComponentInChildren<Player>()) {
+				finishLine.PlayerDied(gameObject.GetComponentInChildren<Player>().gameObject.name);
+			}
+
 			// Destroy the object because it's no longer on the map.
 			Destroy(gameObject);
 		}

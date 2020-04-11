@@ -535,3 +535,4 @@ C:\Manic-Panic\Manic Panic\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cac
 C:\Manic-Panic\Manic Panic\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Manic-Panic\Manic Panic\obj\Debug\Assembly-CSharp.dll
 C:\Manic-Panic\Manic Panic\obj\Debug\Assembly-CSharp.pdb
+C:\Manic-Panic\Manic Panic\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache

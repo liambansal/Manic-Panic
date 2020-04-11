@@ -51,7 +51,7 @@ public class FinishLine : MonoBehaviour {
 		}
 	}
 
-	internal void PlayerDied(string player) {
+	public void PlayerDied(string player) {
 		if (players.Contains(player)) {
 			players.Remove(player);
 			--playersAlive;

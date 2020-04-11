@@ -4,11 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Danger
   - Wall
   - Move Position
   - Obstruction
   - Log
+  - FinishLine
+  - Empty Tile
+  - Danger
   layers:
   - Default
   - TransparentFX

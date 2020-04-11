@@ -9,8 +9,8 @@ public class LogManager : MonoBehaviour {
 
 	private float[] spawnTimers;
 
-	private const float minSpawnTime = 5.0f;
-	private const float maxSpawnTime = 14.0f; // If a log spawns with a timer 
+	private const float minSpawnTime = 2.5f;
+	private const float maxSpawnTime = 6.0f; // If a log spawns with a timer 
 	// value of 3.0f and this is set to 14.0f then at least one log is 
 	// guaranteed to spawn in the row above/below before the log reaches the 
 	// edge of the map.
