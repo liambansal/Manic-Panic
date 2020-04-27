@@ -12,6 +12,8 @@ public class TreasureBag : MonoBehaviour {
 	private int coinsCollected = 0;
 	
 	private const float playerRadius = 0.5f;
+	private const float raycastDistance = 0.9f;
+	private const float dropDistance = 1.0f;
 
 	private void Start() {
 		scoreController = GameObject.Find("Score Controller");
@@ -22,17 +24,17 @@ public class TreasureBag : MonoBehaviour {
 		scoreController.GetComponent<ScoreController>().IncreaseScore(gameObject.name, 10);
 	}
 	
-	private void DropTreasure() {
+	public void DropTreasure() {
 		if (coinsCollected > 0) {
 			RaycastHit2D ray;
 
 			for (int i = 1; i <= 4;) {
 				switch (i) {
 					case 1: {
-						ray = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + playerRadius), Vector2.up, 0.9f);
+						ray = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + playerRadius), Vector2.up, raycastDistance);
 
-						if (!ray.collider) {
-							Instantiate(coin, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
+						if (!ray.collider || (ray.collider && (ray.collider.CompareTag("Empty Tile") || ray.collider.CompareTag("Hazard")))) {
+							Instantiate(coin, new Vector2(transform.position.x, transform.position.y + dropDistance), Quaternion.identity);
 							--coinsCollected;
 							scoreController.GetComponent<ScoreController>().DecreaseScore(gameObject.name, 10);
 							i += 4;
@@ -44,10 +46,10 @@ public class TreasureBag : MonoBehaviour {
 					}
 
 					case 2: {
-						ray = Physics2D.Raycast(new Vector2(transform.position.x - playerRadius, transform.position.y), Vector2.left, 0.9f);
+						ray = Physics2D.Raycast(new Vector2(transform.position.x - playerRadius, transform.position.y), Vector2.left, raycastDistance);
 
-						if (!ray.collider) {
-							Instantiate(coin, new Vector2(transform.position.x - 1, transform.position.y), Quaternion.identity);
+						if (!ray.collider || (ray.collider && (ray.collider.CompareTag("Empty Tile") || ray.collider.CompareTag("Hazard")))) {
+							Instantiate(coin, new Vector2(transform.position.x - dropDistance, transform.position.y), Quaternion.identity);
 							--coinsCollected;
 							scoreController.GetComponent<ScoreController>().DecreaseScore(gameObject.name, 10);
 							i += 4;
@@ -59,10 +61,10 @@ public class TreasureBag : MonoBehaviour {
 					}
 
 					case 3: {
-						ray = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - playerRadius), Vector2.down, 0.9f);
+						ray = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - playerRadius), Vector2.down, raycastDistance);
 
-						if (!ray.collider) {
-							Instantiate(coin, new Vector2(transform.position.x, transform.position.y - 1), Quaternion.identity);
+						if (!ray.collider || (ray.collider && (ray.collider.CompareTag("Empty Tile") || ray.collider.CompareTag("Hazard")))) {
+							Instantiate(coin, new Vector2(transform.position.x, transform.position.y - dropDistance), Quaternion.identity);
 							--coinsCollected;
 							scoreController.GetComponent<ScoreController>().DecreaseScore(gameObject.name, 10);
 							i += 4;
@@ -74,10 +76,10 @@ public class TreasureBag : MonoBehaviour {
 					}
 
 					case 4: {
-						ray = Physics2D.Raycast(new Vector2(transform.position.x + playerRadius, transform.position.y), Vector2.right, 0.9f);
+						ray = Physics2D.Raycast(new Vector2(transform.position.x + playerRadius, transform.position.y), Vector2.right, raycastDistance);
 
-						if (!ray.collider) {
-							Instantiate(coin, new Vector2(transform.position.x + 1, transform.position.y), Quaternion.identity);
+						if (!ray.collider || (ray.collider && (ray.collider.CompareTag("Empty Tile") || ray.collider.CompareTag("Hazard")))) {
+							Instantiate(coin, new Vector2(transform.position.x + dropDistance, transform.position.y), Quaternion.identity);
 							--coinsCollected;
 							scoreController.GetComponent<ScoreController>().DecreaseScore(gameObject.name, 10);
 							i += 4;

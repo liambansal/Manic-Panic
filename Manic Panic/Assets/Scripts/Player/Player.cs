@@ -250,8 +250,10 @@ public class Player : MonoBehaviour {
 			transform.SetParent(null);
 		}
 
-		// Moves the player up from their current position.
-		gameObject.transform.Translate((moveDirection * distance), Space.World);
+		// Moves the player from their current position.
+		gameObject.transform.Translate(moveDirection * distance, Space.World);
+		// Clamp the player's position to a .5 decimal number.
+		gameObject.transform.position = ClampPosition(gameObject.transform.position);
 		canMove = false;
 		movePosition.transform.localPosition = Vector2.zero;
 	}
@@ -361,7 +363,7 @@ public class Player : MonoBehaviour {
 	public void Stunned() {
 		stunned = true;
 		gameObject.GetComponent<SpriteRenderer>().sprite = uiBox; // TODO: delete line once animation is in place
-		gameObject.SendMessage("DropTreasure");
+		gameObject.GetComponent<TreasureBag>().DropTreasure();
 	}
 
 	private RaycastHit2D Raycast(Transform origin, Directions direction, float distance, int layer) {
@@ -387,5 +389,29 @@ public class Player : MonoBehaviour {
 				return Physics2D.Raycast(new Vector2(origin.position.x, origin.position.y), Vector2.up, 0.0f, layer);
 			}
 		}
+	}
+
+	Vector2 ClampPosition(Vector2 position) {
+		// Gets two scalar values for comparing whether or not we need to clamp the player's x/y 
+		// position up or down to the nearest float ending in .5.
+		// NormalisedVector.x/y > 0.0f would mean we need to clamp up.
+		Vector2 normalisedVector = position.normalized;
+
+		if (normalisedVector.x > 0.0f) {
+			// Casting a float to an integer truncates the number so we get a whole number.
+			// Simply add/subtract 0.5 to allign the scalar value to the level's tilemap.
+			position.x = (int)position.x + 0.5f;
+		} else if (normalisedVector.x <= 0.0f) {
+			position.x = (int)position.x - 0.5f;
+		}
+
+		if (normalisedVector.y > 0.0f) {
+			position.y = (int)position.y + 0.5f;
+		} else if (normalisedVector.y <= 0.0f) {
+			position.y = (int)position.y - 0.5f;
+		}
+
+		Vector2 clampedVector = position;
+		return clampedVector;
 	}
 }

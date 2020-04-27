@@ -11,6 +11,7 @@ TagManager:
   - FinishLine
   - Empty Tile
   - Danger
+  - Cell
   layers:
   - Default
   - TransparentFX

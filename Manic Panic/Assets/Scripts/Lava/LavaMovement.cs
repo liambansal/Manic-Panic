@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class LavaMovement : MonoBehaviour {
-	private float movementSpeed = 3;
+	private readonly float movementSpeed = 3.2f;
 
 	private Rigidbody2D lavaRigidbody = null;
 
@@ -15,7 +15,7 @@ public class LavaMovement : MonoBehaviour {
 		} else {
 			lavaRigidbody.velocity = Vector2.zero;
 		}
-    }
+	}
 
 	private void MoveUpwards() {
 		lavaRigidbody.AddForce((Vector2.up * Time.deltaTime * movementSpeed), ForceMode2D.Force);
