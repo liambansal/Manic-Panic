@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
 public class LavaMovement : MonoBehaviour {
-	private readonly float movementSpeed = 3.2f;
+	private readonly int moveForce = 45;
+
+	private bool isMoving = false;
 
 	private Rigidbody2D lavaRigidbody = null;
 
@@ -10,14 +12,20 @@ public class LavaMovement : MonoBehaviour {
 	}
 
 	private void FixedUpdate() {
+		// Only moves if at least one player is alive.
 		if (GameObject.FindGameObjectWithTag("Player")) {
-			MoveUpwards();
+			// Checks if we have already started to move.
+			if (!isMoving) {
+				MoveUpwards();
+			}
 		} else {
+			// Stops moving when no one is alive.
 			lavaRigidbody.velocity = Vector2.zero;
 		}
 	}
 
 	private void MoveUpwards() {
-		lavaRigidbody.AddForce((Vector2.up * Time.deltaTime * movementSpeed), ForceMode2D.Force);
+		lavaRigidbody.AddForce((Vector2.up * moveForce), ForceMode2D.Force);
+		isMoving = true;
 	}
 }
