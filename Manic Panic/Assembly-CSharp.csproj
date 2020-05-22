@@ -62,34 +62,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Camera\GameCamera.cs" />
-    <Compile Include="Assets\Scripts\Coin.cs" />
-    <Compile Include="Assets\Scripts\FinishLine.cs" />
-    <Compile Include="Assets\Scripts\Hazard.cs" />
-    <Compile Include="Assets\Scripts\Lava\LavaMovement.cs" />
-    <Compile Include="Assets\Scripts\Log.cs" />
-    <Compile Include="Assets\Scripts\LogManager.cs" />
-    <Compile Include="Assets\Scripts\Player\Player.cs" />
-    <Compile Include="Assets\Scripts\Player\TreasureBag.cs" />
-    <Compile Include="Assets\Scripts\ScoreController.cs" />
-    <Compile Include="Assets\Scripts\WinScreen.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Camera\GameCamera.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Coin.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\FinishLine.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Hazard.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Lava\LavaMovement.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Log.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\LogManager.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Player\TreasureBag.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\ScoreController.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\WinScreen.cs" />
+    <Compile Include="Assets\Scripts\Menus\CharacterSelect.cs" />
+    <Compile Include="Assets\Scripts\Menus\MainMenuController.cs" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/Liam Bansal/Desktop/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/Liam Bansal/Desktop/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/Liam Bansal/Desktop/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/Liam Bansal/Desktop/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/Liam Bansal/Desktop/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/Users/Liam Bansal/Desktop/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/2019.1.9f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -275,13 +277,13 @@
       <HintPath>C:/Program Files/Unity/2019.1.9f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Manic-Panic/Manic Panic/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/Liam Bansal/Desktop/Manic-Panic/Manic Panic/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Manic-Panic/Manic Panic/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/Liam Bansal/Desktop/Manic-Panic/Manic Panic/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Manic-Panic/Manic Panic/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/Liam Bansal/Desktop/Manic-Panic/Manic Panic/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/2019.1.9f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
