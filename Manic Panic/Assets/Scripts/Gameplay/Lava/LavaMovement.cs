@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class LavaMovement : MonoBehaviour {
-	private readonly int moveForce = 45;
+	private readonly int moveForce = 37;
 
 	private bool isMoving = false;
 
