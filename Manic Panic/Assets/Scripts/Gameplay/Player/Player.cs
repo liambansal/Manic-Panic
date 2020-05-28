@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 	[SerializeField]
@@ -8,9 +9,9 @@ public class Player : MonoBehaviour {
 	private GameObject movePosition = null; // Used for casting rays one tile ahead of the player when jumping.
 
 	[SerializeField]
-	private Sprite uiBox = null;
+	private Sprite stunSprite = null;
 	[SerializeField]
-	private Sprite playerSprite = null;
+	private Sprite[] characterSprites = new Sprite[4];
 
 	private const int moveDistance = 1;
 	private const int jumpDistance = 2;
@@ -35,10 +36,17 @@ public class Player : MonoBehaviour {
 	private bool canPunch = true;
 	private bool stunned = false;
 
+	private Sprite playerSprite = null;
+
 	private enum Directions { Up, Left, Down, Right };
 
 	private RaycastHit2D rayOne = new RaycastHit2D(); // Used for checking tiles around the player.
 	private RaycastHit2D rayTwo = new RaycastHit2D(); // Used for checking tiles around objects hit by ray one.
+
+	private void Start() {
+		playerSprite = characterSprites[PlayerPrefs.GetInt(controllerPrefix)];
+		gameObject.GetComponent<SpriteRenderer>().sprite = playerSprite;
+	}
 
 	private void Update() {
 		// It's only possible for the player to have a log as a parent.
@@ -362,7 +370,7 @@ public class Player : MonoBehaviour {
 
 	public void Stunned() {
 		stunned = true;
-		gameObject.GetComponent<SpriteRenderer>().sprite = uiBox; // TODO: delete line once animation is in place
+		gameObject.GetComponent<SpriteRenderer>().sprite = stunSprite; // TODO: delete line once animation is in place
 		gameObject.GetComponent<TreasureBag>().DropTreasure();
 	}
 

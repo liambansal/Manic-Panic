@@ -131,7 +131,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 6a6d8ac4d4756e342992123c9cfa6bc6, type: 3}
-  m_Color: {r: 0, g: 0.4226508, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -203,7 +203,11 @@ MonoBehaviour:
   controllerPrefix: P2
   movePosition: {fileID: 3244000822670906204}
   uiBox: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  playerSprite: {fileID: 21300000, guid: 6a6d8ac4d4756e342992123c9cfa6bc6, type: 3}
+  characterSprites:
+  - {fileID: 3073141771792860998, guid: d8de707b366808341a4e4f4cd68814fe, type: 3}
+  - {fileID: 1531458334925050924, guid: 6c040afe4f66b014899ed1f7ca5f1c56, type: 3}
+  - {fileID: 6562355492225381120, guid: d3f2d2be9256d3442a3a3f300c79d801, type: 3}
+  - {fileID: -528495072751477585, guid: 06e035f7ae26dd2498a5baca69ea278b, type: 3}
 --- !u!114 &-1835464688364819133
 MonoBehaviour:
   m_ObjectHideFlags: 0
