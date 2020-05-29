@@ -5,25 +5,24 @@ using UnityEngine.UI;
 public class CharacterSelect : MonoBehaviour {
 	[SerializeField]
 	private Sprite[] characterSprites = new Sprite[4];
-	[SerializeField]
-	private Sprite joinPrompt = null;
 
 	[SerializeField]
 	private Image[] displayedImage = new Image[4];
 
 	// We need at least two players to play against each other.
-	private const int minimumPlayers = 2;
+	private const int minimumPlayers = 1;
 	// We only support up to four players.
 	private const int maximumPlayers = 4;
 	// This should be one less than the maximum players.
 	private const int maximumArraySize = 3;
+
 	// How many people are playing.
-	private int playerCount = 0;
 	private int[] characterPosition = new int[4];
+	private int playerCount = 0;
 
 	// Decides whether or not a player can select a different character.
 	private float[] selectTimer = new float[4];
-	private float cooldownTime = 0.5f;
+	private float selectCooldown = 0.25f;
 
 	// Which players are playing. Represents player 1 through 4.
 	private bool[] players = new bool[4] { false, false, false, false };
@@ -40,7 +39,7 @@ public class CharacterSelect : MonoBehaviour {
 	private void Start() {
 		// Initialize arrays.
 		for (int i = 0; i < maximumPlayers; ++i) {
-			selectTimer[i] = cooldownTime;
+			selectTimer[i] = selectCooldown;
 			characterPosition[i] = 0;
 		}
 	}
@@ -69,8 +68,6 @@ public class CharacterSelect : MonoBehaviour {
 		for (int i = 0; i < maximumPlayers; ++i) {
 			// If the player hasn't already opted in to play.
 			if (players[i] == false) {
-				displayedImage[i].sprite = joinPrompt;
-
 				// Check if the player wants to play.
 				if (Input.GetAxis(playerPrefixes[i] + "Jump") > 0.0f) {
 					// Note the player is playing.
@@ -101,7 +98,7 @@ public class CharacterSelect : MonoBehaviour {
 					// Stops the player from moving through the character selections at a rate too 
 					// fast to control.
 					canSelect[i] = false;
-					selectTimer[i] = cooldownTime;
+					selectTimer[i] = selectCooldown;
 					// Increase the character position to select the next playable character.
 					++characterPosition[i];
 
@@ -129,7 +126,7 @@ public class CharacterSelect : MonoBehaviour {
 					// Same code as previous if statement except we're selecting the previous 
 					// character this time.
 					canSelect[i] = false;
-					selectTimer[i] = cooldownTime;
+					selectTimer[i] = selectCooldown;
 					--characterPosition[i];
 
 					if (characterPosition[i] < 0) {
@@ -192,6 +189,9 @@ public class CharacterSelect : MonoBehaviour {
 		if (playerCount >= minimumPlayers) {
 			// ...check they're all ready.
 			if (playersReady == playerCount) {
+				// Record how many players are playing so we spawn the appropriate amount of 
+				// characters later on.
+				PlayerPrefs.SetInt("Player Count", playersReady);
 				// Load a gameplay scene here.
 				SceneManager.LoadScene("Level One", LoadSceneMode.Single);
 			}

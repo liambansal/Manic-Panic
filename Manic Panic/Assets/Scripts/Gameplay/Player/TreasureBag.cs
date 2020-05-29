@@ -6,8 +6,6 @@ public class TreasureBag : MonoBehaviour {
 
 	[SerializeField]
 	private GameObject coin = null;
-	[SerializeField]
-	private GameObject scoreController = null;
 
 	private int coinsCollected = 0;
 	
@@ -15,8 +13,10 @@ public class TreasureBag : MonoBehaviour {
 	private const float raycastDistance = 0.9f;
 	private const float dropDistance = 1.0f;
 
+	public GameObject scoreController = null;
+
 	private void Start() {
-		scoreController = GameObject.Find("Score Controller");
+		scoreController = GameObject.FindGameObjectWithTag("ScoreController");
 	}
 
 	private void PickupTreasure() {

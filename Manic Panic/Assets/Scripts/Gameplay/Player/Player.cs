@@ -22,14 +22,14 @@ public class Player : MonoBehaviour {
 	private const float playerRadius = 0.5f;
 	private const float raycastDistance = 0.9f;
 	private const float moveCooldown = 0.25f;
-	private const float punchCooldownLength = 4.0f;
+	private const float punchCooldown = 4.0f;
 	private const float stunLength = 2.0f;
 
 	// The layer we're currently casting rays onto.
 	private int currentLayer = 0;
 
 	private float moveTimer = 0.25f;
-	private float punchCooldown = 0.0f;
+	private float punchTimer = 0.0f;
 	private float stunTimer = 2.0f;
 
 	private bool canMove = true;
@@ -68,12 +68,12 @@ public class Player : MonoBehaviour {
 
 			// Cooldown timer logic for punching.
 			if (!canPunch) {
-				punchCooldown -= Time.deltaTime;
+				punchTimer -= Time.deltaTime;
 			}
 
-			if (punchCooldown <= 0.0f) {
+			if (punchTimer <= 0.0f) {
 				canPunch = true;
-				punchCooldown = punchCooldownLength;
+				punchTimer = punchCooldown;
 			}
 		} else if (stunned) {
 			canMove = false;

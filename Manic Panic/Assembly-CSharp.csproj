@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Gameplay\Log.cs" />
     <Compile Include="Assets\Scripts\Gameplay\LogManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Player\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\TreasureBag.cs" />
     <Compile Include="Assets\Scripts\Gameplay\ScoreController.cs" />
     <Compile Include="Assets\Scripts\Gameplay\WinScreen.cs" />

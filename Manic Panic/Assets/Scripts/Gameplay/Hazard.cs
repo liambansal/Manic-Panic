@@ -1,13 +1,19 @@
 ﻿using UnityEngine;
 
 public class Hazard : MonoBehaviour {
-	[SerializeField]
-	private FinishLine finishLine = null;
+	private string playerTag = "Player";
+	private string playerManagerTag = "PlayerManager";
+
+	private PlayerManager playerManager = null;
+
+	private void Start() {
+		playerManager = GameObject.FindGameObjectWithTag(playerManagerTag).GetComponent<PlayerManager>();
+	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
-		if (other.CompareTag("Player")) {
+		if (other.CompareTag(playerTag)) {
 			Destroy(other.gameObject);
-			finishLine.PlayerDied(other.gameObject.name);
+			playerManager.PlayerDied(other.gameObject.name);
 		}
 	}
 }
