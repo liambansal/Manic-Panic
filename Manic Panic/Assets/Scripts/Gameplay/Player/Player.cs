@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 	[SerializeField]
@@ -16,25 +15,32 @@ public class Player : MonoBehaviour {
 	private const int moveDistance = 1;
 	private const int jumpDistance = 2;
 	// Bitshifted values are used for casting rays on specific unity layers.
-	private const int levelLayerBitShifted = 1 << 8; // Level layer may have: Empty Tiles, Rocks, Players, Holes and Water.
-	private const int logLayerBitShifted = 1 << 9; // The only objects that can be on the log layer are: Logs and Players.
+	// Level layer may have: Empty Tiles, Rocks, Players, Holes and Water.
+	private const int levelLayerBitShifted = 1 << 8;
+	// The only objects that can be on the log layer are: Logs and Players.
+	private const int logLayerBitShifted = 1 << 9;
 
 	private const float playerRadius = 0.5f;
 	private const float raycastDistance = 0.9f;
-	private const float moveCooldown = 0.25f;
+	private const float moveCooldown = 0.3f;
+	private const float jumpCooldown = 0.6f;
 	private const float punchCooldown = 4.0f;
 	private const float stunLength = 2.0f;
 
 	// The layer we're currently casting rays onto.
 	private int currentLayer = 0;
 
-	private float moveTimer = 0.25f;
+	private float moveTimer = 0.3f;
+	private float jumpTimer = 0.6f;
 	private float punchTimer = 0.0f;
 	private float stunTimer = 2.0f;
 
 	private bool canMove = true;
+	private bool canJump = true;
 	private bool canPunch = true;
 	private bool stunned = false;
+
+	private PauseMenuController pauseMenuController = null;
 
 	private Sprite playerSprite = null;
 
@@ -46,49 +52,61 @@ public class Player : MonoBehaviour {
 	private void Start() {
 		playerSprite = characterSprites[PlayerPrefs.GetInt(controllerPrefix)];
 		gameObject.GetComponent<SpriteRenderer>().sprite = playerSprite;
+		pauseMenuController = GameObject.FindGameObjectWithTag("PauseMenuController").GetComponent<PauseMenuController>();
 	}
 
 	private void Update() {
-		// It's only possible for the player to have a log as a parent.
-		if (transform.parent != null) {
-			// Moves the player with their parent.
-			transform.position = gameObject.transform.parent.position;
+		if (!pauseMenuController.isPaused) {
+			// It's only possible for the player to have a log as a parent.
+			if (transform.parent != null) {
+				// Moves the player with their parent.
+				transform.position = gameObject.transform.parent.position;
+			}
+
+			if (!stunned) {
+				// Cooldown timer logic for moving.
+				if (!canMove) {
+					moveTimer -= Time.deltaTime;
+				}
+
+				if (moveTimer <= 0.0f) {
+					canMove = true;
+					moveTimer = moveCooldown;
+				}
+
+				// Cooldown timer logic for jumping.
+				if (!canJump) {
+					jumpTimer -= Time.deltaTime;
+				}
+
+				if (jumpTimer <= 0.0f) {
+					canJump = true;
+					jumpTimer = jumpCooldown;
+				}
+
+				// Cooldown timer logic for punching.
+				if (!canPunch) {
+					punchTimer -= Time.deltaTime;
+				}
+
+				if (punchTimer <= 0.0f) {
+					canPunch = true;
+					punchTimer = punchCooldown;
+				}
+			} else if (stunned) {
+				canMove = false;
+				canPunch = false;
+				stunTimer -= Time.deltaTime;
+			}
+
+			if (stunTimer <= 0.0f) {
+				stunned = false;
+				gameObject.GetComponent<SpriteRenderer>().sprite = playerSprite;
+				stunTimer = stunLength;
+			}
+
+			HandleInput();
 		}
-
-		if (!stunned) {
-			// Cooldown timer logic for moving.
-			if (!canMove) {
-				moveTimer -= Time.deltaTime;
-			}
-
-			if (moveTimer <= 0.0f) {
-				canMove = true;
-				moveTimer = moveCooldown;
-			}
-
-			// Cooldown timer logic for punching.
-			if (!canPunch) {
-				punchTimer -= Time.deltaTime;
-			}
-
-			if (punchTimer <= 0.0f) {
-				canPunch = true;
-				punchTimer = punchCooldown;
-			}
-		} else if (stunned) {
-			canMove = false;
-			canPunch = false;
-			stunTimer -= Time.deltaTime;
-			// TODO: Play stun animation. + Enable movement once animation has finished.
-		}
-
-		if (stunTimer <= 0.0f) {
-			stunned = false;
-			gameObject.GetComponent<SpriteRenderer>().sprite = playerSprite;
-			stunTimer = stunLength;
-		}
-
-		HandleInput();
 	}
 
 	void HandleInput() {
@@ -106,7 +124,7 @@ public class Player : MonoBehaviour {
 		}
 
 		// Checks input for jumping.
-		if ((Input.GetAxis(controllerPrefix + "Jump") > 0.0f) && canMove) {
+		if ((Input.GetAxis(controllerPrefix + "Jump") > 0.0f) && canJump) {
 			HandleJumping();
 		}
 
@@ -214,7 +232,7 @@ public class Player : MonoBehaviour {
 						return; // Return because we don't want to jump into a tile underneath the player on a different layer.
 					}
 				}
-			} else if (rayTwo.collider && rayTwo.collider.CompareTag("Player")) {
+			} else if (rayOne.collider && rayOne.collider.CompareTag("Player")) {
 				// Return because we don't want to jump over the player.
 				return;
 			}
@@ -263,6 +281,7 @@ public class Player : MonoBehaviour {
 		// Clamp the player's position to a .5 decimal number.
 		gameObject.transform.position = ClampPosition(gameObject.transform.position);
 		canMove = false;
+		canJump = false;
 		movePosition.transform.localPosition = Vector2.zero;
 	}
 
@@ -370,7 +389,7 @@ public class Player : MonoBehaviour {
 
 	public void Stunned() {
 		stunned = true;
-		gameObject.GetComponent<SpriteRenderer>().sprite = stunSprite; // TODO: delete line once animation is in place
+		gameObject.GetComponent<SpriteRenderer>().sprite = stunSprite;
 		gameObject.GetComponent<TreasureBag>().DropTreasure();
 	}
 

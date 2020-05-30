@@ -14,6 +14,8 @@ TagManager:
   - Cell
   - PlayerManager
   - ScoreController
+  - EventSystem
+  - PauseMenuController
   layers:
   - Default
   - TransparentFX

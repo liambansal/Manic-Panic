@@ -1,0 +1,629 @@
+fileFormatVersion: 2
+guid: d8de707b366808341a4e4f4cd68814fe
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3073141771792860998
+    second: Blue Walking_0
+  - first:
+      213: -8366978782271349221
+    second: Blue Walking_1
+  - first:
+      213: -218198492652182253
+    second: Blue Walking_2
+  - first:
+      213: 2641597544120119935
+    second: Blue Walking_3
+  - first:
+      213: -7746534199507522883
+    second: Blue Walking_4
+  - first:
+      213: 2507644453871920359
+    second: Blue Walking_5
+  - first:
+      213: 3344370506801385753
+    second: Blue Walking_6
+  - first:
+      213: 8462674140732597124
+    second: Blue Walking_7
+  - first:
+      213: 6874933457513640492
+    second: Blue Walking_8
+  - first:
+      213: 4083251924215876698
+    second: Blue Walking_9
+  - first:
+      213: 4984009497470388043
+    second: Blue Walking_10
+  - first:
+      213: -6987706929150789158
+    second: Blue Walking_11
+  - first:
+      213: -6639290128680982924
+    second: Blue Walking_12
+  - first:
+      213: 1558014842583103036
+    second: Blue Walking_13
+  - first:
+      213: -5941566234317293015
+    second: Blue Walking_14
+  - first:
+      213: 87598990616922893
+    second: Blue Walking_15
+  - first:
+      213: -9102737704260583901
+    second: Blue Walking_16
+  - first:
+      213: -2458816334222024400
+    second: Blue Walking_17
+  - first:
+      213: -7856417116715694593
+    second: Blue Walking_18
+  - first:
+      213: -2614091879422273306
+    second: Blue Walking_19
+  - first:
+      213: 7260798479043899219
+    second: Blue Walking_20
+  - first:
+      213: -6358942706418913346
+    second: Blue Walking_21
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Blue Walking_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 309
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88496845a0a9c7a4baaa5601f6352689
+      internalID: 3073141771792860998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_1
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 309
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ead1ec655eb63c94394c1684d8f29425
+      internalID: -8366978782271349221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_2
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 309
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b81bd5f14bfef648933d406ec605303
+      internalID: -218198492652182253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_3
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 309
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76e11d338cc166541bacbf7274315bfd
+      internalID: 2641597544120119935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_4
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 309
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b0034dc821696c4a9e90956e8662803
+      internalID: -7746534199507522883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_5
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 309
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd4494de68ff21b4a97fb6019a8f3487
+      internalID: 2507644453871920359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_6
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 207
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3998748cf8820a41b12dbc89a286a4b
+      internalID: 3344370506801385753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_7
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 207
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc10b8c26411210419f1a3d6bf2f5931
+      internalID: 8462674140732597124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_8
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 207
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfce00f277f371244a77a39ae40609f4
+      internalID: 6874933457513640492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_9
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 207
+        width: 51
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba9f3c0c1fe02df4fa7f0f72ccd3e06b
+      internalID: 4083251924215876698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_10
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 207
+        width: 51
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3606747d097d0f47a7255b676df6446
+      internalID: 4984009497470388043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_11
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 207
+        width: 51
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf42b8476c2c8d846b6b9937d4b4c5cc
+      internalID: -6987706929150789158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_12
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 105
+        width: 51
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c1f95e832c5695488d5bfc6bb25014d
+      internalID: -6639290128680982924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_13
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 105
+        width: 51
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6d90bf4fa55c914883b238687b2e99b
+      internalID: 1558014842583103036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_14
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 105
+        width: 51
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25222ed96ca1de74bb10900aa990c5a9
+      internalID: -5941566234317293015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_15
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 105
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dd656c23ee8d6049aa3dc24a70642f4
+      internalID: 87598990616922893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_16
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 105
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6a987c6488d5394fa520c378322ef4f
+      internalID: -9102737704260583901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_17
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 105
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fef2c7f7bc1a0a445acc471cda62c037
+      internalID: -2458816334222024400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_18
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 3
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9730af037a0fc74b849618636e9702e
+      internalID: -7856417116715694593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_19
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 3
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f1f9bde642b76e4c89485966466e289
+      internalID: -2614091879422273306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_20
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 3
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f199564307c87a54fa311528db95f65b
+      internalID: 7260798479043899219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Blue Walking_21
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 3
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 378de44c65c582140ad1a13c4400f1fb
+      internalID: -6358942706418913346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: b8e0e3acc868d5541a6cfaa50cce8014
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

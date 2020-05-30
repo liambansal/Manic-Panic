@@ -11,6 +11,8 @@ public class PlayerManager : MonoBehaviour {
 	private GameObject[] playerCameras = new GameObject[4];
 	[SerializeField]
 	private GameObject[] deathScreens = new GameObject[4];
+	[SerializeField]
+	private GameObject deathAnimation = null;
 
 	[SerializeField]
 	private Vector3[] spawnPositions = new Vector3[4];
@@ -27,6 +29,7 @@ public class PlayerManager : MonoBehaviour {
 
 	private GameObject scoreController = null;
 
+	// A list of the players in the level scene.
 	private LinkedList<string> playerList = new LinkedList<string>();
 
 	void Start() {
@@ -48,6 +51,8 @@ public class PlayerManager : MonoBehaviour {
 
 		scoreController = GameObject.FindGameObjectWithTag("ScoreController");
 		scoreController.GetComponent<ScoreController>().InitializeScores();
+		// Set the default time scale in case it wasn't reset in a previous game.
+		Time.timeScale = 1.0f;
 	}
 
 	private void Update() {
@@ -64,14 +69,18 @@ public class PlayerManager : MonoBehaviour {
 	/// 
 	/// </summary>
 	/// <param name="player"> The player that has died (their 'game object' name). </param>
-	public void PlayerDied(string player) {
-		if (playerList.Contains(player)) {
-			playerList.Remove(player);
+	public void PlayerDied(GameObject player) {
+		if (playerList.Contains(player.name)) {
+			// Spawn a death animation prefabs to show the player has died.
+			Instantiate(deathAnimation, player.transform.position, Quaternion.identity);
+			// Destroy the player object and remove them from the list of active players.
+			Destroy(player);
+			playerList.Remove(player.name);
 			--playersAlive;
 
 			// Activates the death screen for the player that has died.
 			for (int i = 0; i < maximumPlayerCount; ++i) {
-				if (player == playerGameObjectNames[i]) {
+				if (player.name == playerGameObjectNames[i]) {
 					deathScreens[i].SetActive(true);
 					deathScreens[i].GetComponent<Animator>().SetBool("fadeIn", true);
 				}

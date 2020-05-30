@@ -32,11 +32,8 @@ public class Log : MonoBehaviour {
 		if (Vector2.Distance(transform.position, spawnPosition) >= 20.0f) {
 			// Checks if the log has a player as a child.
 			if (gameObject.GetComponentInChildren<Player>()) {
-				playerManager.PlayerDied(gameObject.GetComponentInChildren<Player>().gameObject.name);
+				playerManager.PlayerDied(gameObject.GetComponentInChildren<Player>().gameObject);
 			}
-
-			// Destroy the object because it's no longer on the map.
-			Destroy(gameObject);
 		}
 	}
 }

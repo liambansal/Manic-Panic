@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - CharacterSelect
     - Coin
+    - CreditsController
     - FinishLine
     - GameCamera
     - Hazard
@@ -10,8 +11,11 @@ ScriptsOnlyBuild:
     - Log
     - LogManager
     - MainMenuController
+    - PauseMenuController
     - Player
+    - PlayerManager
     - ScoreController
+    - SplashScreenController
     - TreasureBag
     - WinScreen
     UnityEditor.Graphs.dll:
@@ -46,22 +50,67 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9372}
+      Script: {instanceID: 9308}
     - Class: 114
-      Script: {instanceID: 9374}
+      Script: {instanceID: 9378}
     - Class: 114
       Script: {instanceID: 9380}
     - Class: 114
       Script: {instanceID: 9386}
     - Class: 114
-      Script: {instanceID: 9394}
+      Script: {instanceID: 9392}
     - Class: 114
-      Script: {instanceID: 9416}
+      Script: {instanceID: 9400}
     - Class: 114
-      Script: {instanceID: 9430}
+      Script: {instanceID: 9422}
     - Class: 114
-      Script: {instanceID: 15360}
+      Script: {instanceID: 9436}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/_Scenes/Credits.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9316}
+    - Class: 114
+      Script: {instanceID: 9380}
+    - Class: 114
+      Script: {instanceID: 9386}
+    - Class: 114
+      Script: {instanceID: 9392}
+    - Class: 114
+      Script: {instanceID: 9400}
+    - Class: 114
+      Script: {instanceID: 9436}
+    - Class: 114
+      Script: {instanceID: 9438}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -105,39 +154,45 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 602}
     - Class: 114
-      Script: {instanceID: 9308}
+      Script: {instanceID: 9310}
     - Class: 114
-      Script: {instanceID: 9316}
+      Script: {instanceID: 9320}
     - Class: 114
-      Script: {instanceID: 9374}
+      Script: {instanceID: 9378}
     - Class: 114
       Script: {instanceID: 9380}
     - Class: 114
       Script: {instanceID: 9386}
     - Class: 114
-      Script: {instanceID: 9394}
+      Script: {instanceID: 9392}
     - Class: 114
-      Script: {instanceID: 9430}
+      Script: {instanceID: 9400}
     - Class: 114
-      Script: {instanceID: 9432}
+      Script: {instanceID: 9436}
     - Class: 114
-      Script: {instanceID: 9592}
+      Script: {instanceID: 9438}
     - Class: 114
-      Script: {instanceID: 9632}
+      Script: {instanceID: 9598}
     - Class: 114
-      Script: {instanceID: 9896}
+      Script: {instanceID: 9638}
     - Class: 114
-      Script: {instanceID: 9900}
+      Script: {instanceID: 9696}
     - Class: 114
-      Script: {instanceID: 10058}
+      Script: {instanceID: 9904}
     - Class: 114
-      Script: {instanceID: 10100}
+      Script: {instanceID: 9908}
     - Class: 114
-      Script: {instanceID: 10142}
+      Script: {instanceID: 10066}
     - Class: 114
-      Script: {instanceID: 10272}
+      Script: {instanceID: 10104}
     - Class: 114
-      Script: {instanceID: 10354}
+      Script: {instanceID: 10110}
+    - Class: 114
+      Script: {instanceID: 10152}
+    - Class: 114
+      Script: {instanceID: 10282}
+    - Class: 114
+      Script: {instanceID: 10364}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -169,31 +224,82 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 20
       Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
     - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9372}
+      Script: {instanceID: 9362}
     - Class: 114
-      Script: {instanceID: 9374}
+      Script: {instanceID: 9378}
     - Class: 114
       Script: {instanceID: 9380}
     - Class: 114
       Script: {instanceID: 9386}
     - Class: 114
-      Script: {instanceID: 9394}
+      Script: {instanceID: 9392}
     - Class: 114
-      Script: {instanceID: 9430}
+      Script: {instanceID: 9400}
     - Class: 114
-      Script: {instanceID: 13218}
+      Script: {instanceID: 9436}
+    - Class: 114
+      Script: {instanceID: 9438}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
     - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/_Scenes/Splash Screen.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9380}
+    - Class: 114
+      Script: {instanceID: 9386}
+    - Class: 114
+      Script: {instanceID: 9392}
+    - Class: 114
+      Script: {instanceID: 9400}
+    - Class: 114
+      Script: {instanceID: 9436}
+    - Class: 114
+      Script: {instanceID: 9438}
+    - Class: 114
+      Script: {instanceID: 10476}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
       Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
@@ -222,6 +328,12 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
+      Hash: aba96645c22fda4b9400065741bc867a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CharacterSelect
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -232,6 +344,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_ScrollbarEventHandler
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CreditsController
   - hash:
       serializedVersion: 2
       Hash: 1ab2aeb54834136c5d54ff6a71be3e0b
@@ -250,6 +368,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: ActivationTrack
+  - hash:
+      serializedVersion: 2
+      Hash: b79be9b3f82e919d271e0ff6bdee9444
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MainMenuController
   - hash:
       serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
@@ -660,7 +784,7 @@ ScriptsOnlyBuild:
     className: AnimationTrack
   - hash:
       serializedVersion: 2
-      Hash: 962b3e7e07f86bfe845dcdb0f9ed820b
+      Hash: e6fb4a8ab0b10ffb0db10d71ab4ffad8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameCamera
@@ -676,6 +800,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: AnimationPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: a0a3d355c5a6679f6c3b7389b00bd8ae
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerManager
   - hash:
       serializedVersion: 2
       Hash: 303ad70ce203ad874efe2965d0fbcff9
@@ -732,13 +862,13 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: 03aea0d5e616c259cbaec6e25c5d988b
+      Hash: b06e93fa6e63f4a1129bd5111990dc4b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FinishLine
   - hash:
       serializedVersion: 2
-      Hash: 45b86952f1113905ab7b7ecbdb28863b
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Log
@@ -816,19 +946,25 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
+      Hash: 5bff93919039fd1bf65ca4c824f1d98b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PauseMenuController
+  - hash:
+      serializedVersion: 2
       Hash: c1933cc0a2f4ff6eb13333347497beb3
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 45b86952f1113905ab7b7ecbdb28863b
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Hazard
   - hash:
       serializedVersion: 2
-      Hash: cd9149a3579bb6c5a52bbe63de63454a
+      Hash: 29dfecfdb85740160d8e9c61955c2de4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -852,7 +988,7 @@ ScriptsOnlyBuild:
     className: AudioTrack
   - hash:
       serializedVersion: 2
-      Hash: c369b1a745aea4f53b081b27904f31f4
+      Hash: d26cd4e2a0befae6f60a27edb9a96aff
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ScoreController
@@ -894,6 +1030,12 @@ ScriptsOnlyBuild:
     className: TMP_SubMesh
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SplashScreenController
+  - hash:
+      serializedVersion: 2
       Hash: 8220b46879dc5e37db1b940c938f5744
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -904,22 +1046,11 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: MainMenuController
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: CharacterSelect
   platform: 19
   scenePathNames:
+  - Assets/_Scenes/Splash Screen.unity
   - Assets/_Scenes/Main Menu.unity
   - Assets/_Scenes/Character Selection.unity
   - Assets/_Scenes/Level One.unity
-  playerPath: C:/Users/Liam Bansal/Desktop/Manic-Panic/Manic Panic/Manic Panic/Manic
-    Panic.exe
+  - Assets/_Scenes/Credits.unity
+  playerPath: C:/Manic-Panic/Manic Panic/Manic Panic/Manic Panic.exe

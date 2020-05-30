@@ -129,14 +129,14 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 16
   m_Sprite: {fileID: -528495072751477585, guid: 06e035f7ae26dd2498a5baca69ea278b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 8.59, y: 11.56}
+  m_Size: {x: 0.5588235, y: 0.9411765}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -180,8 +180,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.59375, y: 1}
-    newSize: {x: 8.59, y: 11.56}
+    oldSize: {x: 0.5588235, y: 0.9411765}
+    newSize: {x: 0.5588235, y: 0.9411765}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -203,7 +203,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllerPrefix: P4
   movePosition: {fileID: 1243883048976472018}
-  stunSprite: {fileID: 0}
+  stunSprite: {fileID: -660588872158661608, guid: 7e4b2dd7b6ee9594aac4ba4f325f04f9,
+    type: 3}
   characterSprites:
   - {fileID: 3073141771792860998, guid: d8de707b366808341a4e4f4cd68814fe, type: 3}
   - {fileID: 1531458334925050924, guid: 6c040afe4f66b014899ed1f7ca5f1c56, type: 3}

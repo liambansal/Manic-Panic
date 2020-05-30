@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ac199c11296be2245965694759eaef37
+guid: 708c1ee5704a0d04aabf51da72ca11db
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -20,6 +20,9 @@ TextureImporter:
   - first:
       213: -7255497285719700247
     second: Grass_5
+  - first:
+      213: 6828908663453297030
+    second: Grass_6
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -63,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 80
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1

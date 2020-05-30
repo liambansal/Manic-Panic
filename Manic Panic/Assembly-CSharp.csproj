@@ -62,13 +62,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Gameplay\Camera\GameCamera.cs" />
+    <Compile Include="Assets\Scripts\CreditsController.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Coin.cs" />
     <Compile Include="Assets\Scripts\Gameplay\FinishLine.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Hazard.cs" />
-    <Compile Include="Assets\Scripts\Gameplay\Lava\LavaMovement.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Hazards\Hazard.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Hazards\LavaMovement.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Log.cs" />
     <Compile Include="Assets\Scripts\Gameplay\LogManager.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\Player\GameCamera.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player\TreasureBag.cs" />
@@ -76,6 +77,8 @@
     <Compile Include="Assets\Scripts\Gameplay\WinScreen.cs" />
     <Compile Include="Assets\Scripts\Menus\CharacterSelect.cs" />
     <Compile Include="Assets\Scripts\Menus\MainMenuController.cs" />
+    <Compile Include="Assets\Scripts\Menus\PauseMenuController.cs" />
+    <Compile Include="Assets\Scripts\SplashScreenController.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Manic-Panic/Manic Panic/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

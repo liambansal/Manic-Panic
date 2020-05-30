@@ -10,11 +10,11 @@ public class CharacterSelect : MonoBehaviour {
 	private Image[] displayedImage = new Image[4];
 
 	// We need at least two players to play against each other.
-	private const int minimumPlayers = 1;
+	private const int minimumPlayers = 2;
 	// We only support up to four players.
 	private const int maximumPlayers = 4;
 	// This should be one less than the maximum players.
-	private const int maximumArraySize = 3;
+	private const int maximumArrayIndex = 3;
 
 	// How many people are playing.
 	private int[] characterPosition = new int[4];
@@ -103,7 +103,7 @@ public class CharacterSelect : MonoBehaviour {
 					++characterPosition[i];
 
 					// Once the last playable character has been reached...
-					if (characterPosition[i] > maximumArraySize) {
+					if (characterPosition[i] > maximumArrayIndex) {
 						// ...reset the character position to zero to loop back round to the first 
 						// character.
 						characterPosition[i] = 0;
@@ -130,7 +130,7 @@ public class CharacterSelect : MonoBehaviour {
 					--characterPosition[i];
 
 					if (characterPosition[i] < 0) {
-						characterPosition[i] = maximumArraySize;
+						characterPosition[i] = maximumArrayIndex;
 					}
 
 					displayedImage[i].sprite = characterSprites[characterPosition[i]];

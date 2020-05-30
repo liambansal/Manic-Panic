@@ -1,0 +1,629 @@
+fileFormatVersion: 2
+guid: 06e035f7ae26dd2498a5baca69ea278b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -528495072751477585
+    second: Yellow Walking_0
+  - first:
+      213: 5289480122682615797
+    second: Yellow Walking_1
+  - first:
+      213: 8347530176201562389
+    second: Yellow Walking_2
+  - first:
+      213: 4779777352314686016
+    second: Yellow Walking_3
+  - first:
+      213: 3726721360949762172
+    second: Yellow Walking_4
+  - first:
+      213: 2383605823324317803
+    second: Yellow Walking_5
+  - first:
+      213: 3161150653015202493
+    second: Yellow Walking_6
+  - first:
+      213: 5963831115708764187
+    second: Yellow Walking_7
+  - first:
+      213: -8510472666329502777
+    second: Yellow Walking_8
+  - first:
+      213: 2581306007308873516
+    second: Yellow Walking_9
+  - first:
+      213: 1463160853249767789
+    second: Yellow Walking_10
+  - first:
+      213: 8466808042738021408
+    second: Yellow Walking_11
+  - first:
+      213: -8789651774700781734
+    second: Yellow Walking_12
+  - first:
+      213: -5375806198774124872
+    second: Yellow Walking_13
+  - first:
+      213: 7818225861335863511
+    second: Yellow Walking_14
+  - first:
+      213: -2843351900570057157
+    second: Yellow Walking_15
+  - first:
+      213: -8839091844974744256
+    second: Yellow Walking_16
+  - first:
+      213: 6726697102213015285
+    second: Yellow Walking_17
+  - first:
+      213: -8618846636178632591
+    second: Yellow Walking_18
+  - first:
+      213: -1971671283346449813
+    second: Yellow Walking_19
+  - first:
+      213: 7948267273282440961
+    second: Yellow Walking_20
+  - first:
+      213: -7485096737598935844
+    second: Yellow Walking_21
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 102
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Yellow Walking_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 309
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f66f1dfd9d569644b10c779c7775083
+      internalID: -528495072751477585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_1
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 309
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3420139033dbd2148b1ef311ebb93d5c
+      internalID: 5289480122682615797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_2
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 309
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b41cd396f0c4e642a903e82c1a55dc9
+      internalID: 8347530176201562389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_3
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 309
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2b3dfcafb94ceb4db771aeea57bbd92
+      internalID: 4779777352314686016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_4
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 309
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b00275f9bb94434da3f98841b4fc558
+      internalID: 3726721360949762172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_5
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 309
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d2a6951ea4844341b7df3343a64f4b1
+      internalID: 2383605823324317803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_6
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 207
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9af3d105441810f4b9298f38b8f03b22
+      internalID: 3161150653015202493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_7
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 207
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2f2e93e69b09c745a296712e13cdd5a
+      internalID: 5963831115708764187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_8
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 207
+        width: 51
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84c398c4607c696418eeb2cc88ad8afe
+      internalID: -8510472666329502777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_9
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 207
+        width: 51
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51d3cf8257f423d42898cd291de1ef4c
+      internalID: 2581306007308873516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_10
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 207
+        width: 51
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09c10b9d394934c43ac76dcfa5f5cedf
+      internalID: 1463160853249767789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_11
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 207
+        width: 51
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6402f2e0069ae642b81c5e50f66ba75
+      internalID: 8466808042738021408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_12
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 105
+        width: 51
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcb74fb663f9e8c4d96d7a21dd37e785
+      internalID: -8789651774700781734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_13
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 105
+        width: 51
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 291d59cb40462e747b6c4a02568a8026
+      internalID: -5375806198774124872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_14
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 105
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b1ad547e4ba0ec4f9aafa422f83bbce
+      internalID: 7818225861335863511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_15
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 105
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64ef10128bcdcb848a014969e9e59b05
+      internalID: -2843351900570057157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_16
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 105
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f92f6a1e2dcc0c44861d40021581107
+      internalID: -8839091844974744256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_17
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 105
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a588d3d8a9a2714688a8b056b96caa0
+      internalID: 6726697102213015285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_18
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 3
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2e4a92bbe1a9814f84174742a8dbb16
+      internalID: -8618846636178632591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_19
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 3
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12401679e7c5d964fb268ef023123bf1
+      internalID: -1971671283346449813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_20
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 3
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 254b03e974d8a5047b54cd2e65c7ec50
+      internalID: 7948267273282440961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yellow Walking_21
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 3
+        width: 57
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dca25a148a41b714b9e4d0d585f24e4f
+      internalID: -7485096737598935844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 0df4809e8658aee478c5063dccf89b1f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
