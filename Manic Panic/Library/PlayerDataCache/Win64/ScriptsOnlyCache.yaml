@@ -862,7 +862,7 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: b06e93fa6e63f4a1129bd5111990dc4b
+      Hash: f747fcfaf3f8fe8f0d65cda06f00bcf1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FinishLine
@@ -904,7 +904,7 @@ ScriptsOnlyBuild:
     className: ActivationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 70a49b260f5194c2007665bc47bad426
+      Hash: 6ae449948a63373a4ce8360104077dee
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LogManager

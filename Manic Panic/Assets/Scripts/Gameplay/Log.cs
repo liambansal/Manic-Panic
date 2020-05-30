@@ -1,36 +1,43 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
+/// <summary>
+/// Default behaviour for the log gameObject.
+/// </summary>
 public class Log : MonoBehaviour {
 	private const int speed = 8;
-
+	private const int mapWidth = 20;
+	private const string playerManagerTag = "PlayerManager";
+	private const string wallTag = "Wall";
 	private Vector2 moveDirection;
 	private Vector2 spawnPosition;
-
 	private PlayerManager playerManager = null;
-
 	private Rigidbody2D logRigidbody = null;
-
 	private TilemapCollider2D wallCollider = null;
 
+	/// <summary>
+	/// Gets references to necessary unnasigned class variable objects and projects the log along 
+	/// a course.
+	/// </summary>
 	private void Start() {
-		// Get the map's wall collider before ignoring collisions with it.
-		wallCollider = GameObject.FindWithTag("Wall").GetComponent<TilemapCollider2D>();
-		Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), wallCollider);
-		playerManager = GameObject.FindWithTag("PlayerManager").GetComponent<PlayerManager>();
 		logRigidbody = GetComponent<Rigidbody2D>();
-		// Stores the position the object was spawned at.
+		playerManager = GameObject.FindWithTag(playerManagerTag).GetComponent<PlayerManager>();
+		wallCollider = GameObject.FindWithTag(wallTag).GetComponent<TilemapCollider2D>();
+		Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), wallCollider);
+		// Stores the logs spawn position.
 		spawnPosition = transform.position;
-		// Gets a Vector2 direction towards the map's vertical center.
+		// Gets a direction towards the map's vertical center.
 		moveDirection = new Vector3(0.0f, transform.position.y, transform.position.z) - transform.position;
-		// Adds a single force to move the object in a straight line.
 		logRigidbody.AddForce(moveDirection * speed);
 	}
 
+	/// <summary>
+	/// Destroys the player standing on this log if it crosses its spawn position's opposing map wall.
+	/// </summary>
 	private void Update() {
 		// Checks if the object is more than the maps width away from its spawn position.
-		if (Vector2.Distance(transform.position, spawnPosition) >= 20.0f) {
-			// Checks if the log has a player as a child.
+		if (Vector2.Distance(transform.position, spawnPosition) >= mapWidth) {
+			// Check if there's a player standing on the log.
 			if (gameObject.GetComponentInChildren<Player>()) {
 				playerManager.PlayerDied(gameObject.GetComponentInChildren<Player>().gameObject);
 			}

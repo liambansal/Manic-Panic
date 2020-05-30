@@ -1,6 +1,9 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
+/// <summary>
+/// Controls the spawning of players, their deaths and the game's end state.
+/// </summary>
 public class PlayerManager : MonoBehaviour {
 	[SerializeField]
 	private FinishLine finishLine = null;
@@ -18,43 +21,46 @@ public class PlayerManager : MonoBehaviour {
 	private Vector3[] spawnPositions = new Vector3[4];
 
 	private int playersAlive = 0;
-	private int maximumPlayerCount = 4;
+	private const int maximumPlayerCount = 4;
 
-	private string[] playerPrefixes = new string[4] { "P1", "P2", "P3", "P4"};
-	private string[] playerGameObjectNames = new string[4] { "Player One(Clone)",
+	private readonly string[] playerPrefixes = new string[4] { "P1", "P2", "P3", "P4" };
+	private readonly string[] playerGameObjectNames = new string[4] { "Player One(Clone)",
 		"Player Two(Clone)",
 		"Player Three(Clone)",
 		"Player Four(Clone)" };
-	private string playerTag = "Player";
+	private readonly string playerTag = "Player";
 
 	private GameObject scoreController = null;
-
-	// A list of the players in the level scene.
+	// A name list of the scene's players.
 	private LinkedList<string> playerList = new LinkedList<string>();
 
+	/// <summary>
+	/// Spawns the appropriate amount of players with their correct characters.
+	/// Initializes the player cameras and score controller after this.
+	/// </summary>
 	void Start() {
-		// Loop through all the player prefixes.
+		// Loop through all the player prefixes checking which ones have an assigned character.
 		for (int i = 0; i < maximumPlayerCount; ++i) {
-			// Check if each player prefix has an assigned character.
 			if (PlayerPrefs.HasKey(playerPrefixes[i])) {
-				// Instantiate a player prefab for each player that chose a character in the 
-				// selection screen.
+				// Sets up a character prefab.
 				Instantiate(playerPrefabs[i], spawnPositions[i], Quaternion.identity);
 				++playersAlive;
 				playerCameras[i].GetComponent<GameCamera>().Initialize();
 			}
 		}
 
+		// Stores a list of active characters once they've all been created.
 		foreach (GameObject player in GameObject.FindGameObjectsWithTag(playerTag)) {
 			playerList.AddLast(player.name);
 		}
 
 		scoreController = GameObject.FindGameObjectWithTag("ScoreController");
 		scoreController.GetComponent<ScoreController>().InitializeScores();
-		// Set the default time scale in case it wasn't reset in a previous game.
-		Time.timeScale = 1.0f;
 	}
 
+	/// <summary>
+	/// Checks if the win screen should be activated in place of the death screens.
+	/// </summary>
 	private void Update() {
 		if (playersAlive == finishLine.playersFinished) {
 			for (int i = 0; i < maximumPlayerCount; ++i) {
@@ -66,16 +72,15 @@ public class PlayerManager : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// 
+	/// Removes a player from the scene and activates their death screen.
 	/// </summary>
-	/// <param name="player"> The player that has died (their 'game object' name). </param>
+	/// <param name="player"> The player that has died. </param>
 	public void PlayerDied(GameObject player) {
 		if (playerList.Contains(player.name)) {
 			// Spawn a death animation prefabs to show the player has died.
 			Instantiate(deathAnimation, player.transform.position, Quaternion.identity);
-			// Destroy the player object and remove them from the list of active players.
-			Destroy(player);
 			playerList.Remove(player.name);
+			Destroy(player);
 			--playersAlive;
 
 			// Activates the death screen for the player that has died.

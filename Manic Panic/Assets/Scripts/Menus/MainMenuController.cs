@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class MainMenuController : MonoBehaviour {
 	[SerializeField]
 	private GameObject optionsScreen = null;
 	[SerializeField]
 	private GameObject controllerLayout = null;
-
 	[SerializeField]
 	private Button firstMenuButton = null;
 	[SerializeField]
@@ -16,14 +15,21 @@ public class MainMenuController : MonoBehaviour {
 	[SerializeField]
 	private Button firstControllerLayoutButton = null;
 
-	// State of the controller layout overlay.
+	/// <summary>
+	/// Increase the scene build index by this amount.
+	/// </summary>
+	private const int indexAddition = 1;
+	/// <summary>
+	/// State of the controller layout overlay.
+	/// </summary>
 	private bool layoutActive = false;
-
 	private EventSystem eventSystem = null;
 
+	/// <summary>
+	/// Deletes all "PlayerPrefs" keys and values to 'refresh' the stored player data and finds
+	/// necessary unassigned variable objects.
+	/// </summary>
 	private void Start() {
-		// Delete all "PlayerPrefs" keys and values whenever we visit the main menu so we refresh 
-		// the stored player data.
 		PlayerPrefs.DeleteAll();
 		eventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
 	}
@@ -32,23 +38,15 @@ public class MainMenuController : MonoBehaviour {
 	/// Loads the next scene in the project's build index.
 	/// </summary>
 	private void PlayGame() {
-		// Load the next scene in the build index.
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + indexAddition, LoadSceneMode.Single);
 	}
 
-	/// <summary>
-	/// Opens the options/settings screen and disables the menu buttons.
-	/// </summary>
 	private void OpenSettings() {
-		// Activates the options/settings screen.
 		optionsScreen.SetActive(true);
 		// Select the options screen's first button.
 		eventSystem.SetSelectedGameObject(firstOptionsButton.gameObject);
 	}
 
-	/// <summary>
-	/// Loads the game's credits scene.
-	/// </summary>
 	private void LoadCredits() {
 		SceneManager.LoadScene("Credits", LoadSceneMode.Single);
 	}
@@ -63,27 +61,22 @@ public class MainMenuController : MonoBehaviour {
 			layoutActive = true;
 			// Select the controller layout overlay's first button.
 			eventSystem.SetSelectedGameObject(firstControllerLayoutButton.gameObject);
-		} else { // Disable it.
+		} else {
 			controllerLayout.SetActive(false);
 			layoutActive = false;
-			// Select the options screen's first button.
 			eventSystem.SetSelectedGameObject(firstOptionsButton.gameObject);
 		}
 	}
 
 	/// <summary>
-	/// Closes the options/settings screen and enables the menu buttons.
+	/// Closes the options/settings screen.
 	/// </summary>
 	private void Back() {
-		// Hide the options/settings screen.
 		optionsScreen.SetActive(false);
-		// Select the first main menu button.
+		// Select the main menu's first button.
 		eventSystem.SetSelectedGameObject(firstMenuButton.gameObject);
 	}
 
-	/// <summary>
-	/// Closes the executeable application.
-	/// </summary>
 	private void QuitApplication() {
 		Application.Quit();
 	}

@@ -1,32 +1,38 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class PauseMenuController : MonoBehaviour {
-	/// <summary>
-	/// Should the game be unpaused?
-	/// </summary>
+	[HideInInspector]
 	public bool isPaused { get; private set; } = false;
 
 	[SerializeField]
 	private GameObject pauseMenu = null;
-
 	[SerializeField]
 	private Button firstPauseMenuButton = null;
 
 	private EventSystem eventSystem = null;
 
+	/// <summary>
+	/// Gets the scene's event system.
+	/// </summary>
 	private void Start() {
 		eventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
 	}
 
+	/// <summary>
+	/// Checks if a player wants to pause/unpause the game.
+	/// </summary>
 	private void Update() {
 		if (Input.GetButtonDown("Pause")) {
 			Pause();
 		}
 	}
 
+	/// <summary>
+	/// Pauses or un-pauses the game based on its current pause state.
+	/// </summary>
 	private void Pause() {
 		if (!isPaused) {
 			pauseMenu.SetActive(true);
@@ -40,20 +46,13 @@ public class PauseMenuController : MonoBehaviour {
 		}
 	}
 
-	private void ResumeGame() {
-		Pause();
-	}
-
-	/// <summary>
-	/// Loads the main menu scene.
-	/// </summary>
 	private void LoadMainMenu() {
-		SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+		// Set the default time scale in case we're paused.
+		Time.timeScale = 1.0f;
+		const string mainMenuName = "Main Menu";
+		SceneManager.LoadScene(mainMenuName, LoadSceneMode.Single);
 	}
 
-	/// <summary>
-	/// Closes the executeable application.
-	/// </summary>
 	private void QuitGame() {
 		Application.Quit();
 	}

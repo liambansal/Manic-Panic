@@ -18727,7 +18727,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: ResumeGame
+          m_StringArgument: Pause
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -25651,7 +25651,8 @@ MonoBehaviour:
   - {fileID: 1264744452}
   - {fileID: 259288910}
   - {fileID: 1840939924}
-  log: {fileID: 3049170859393047137, guid: 81f9657ac17bae94ba52e963fc127999, type: 3}
+  logPrefab: {fileID: 3049170859393047137, guid: 81f9657ac17bae94ba52e963fc127999,
+    type: 3}
 --- !u!4 &1489719929
 Transform:
   m_ObjectHideFlags: 0
@@ -31117,13 +31118,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ecea708eab4dc843b19ebf0b83ea193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreController: {fileID: 265591979}
-  winTextbox: {fileID: 1016092334}
   playerGameObjectNames:
   - Player One(Clone)
   - Player Two(Clone)
   - Player Three(Clone)
   - Player Four(Clone)
+  scoreController: {fileID: 265591979}
+  winTextbox: {fileID: 1016092334}
 --- !u!50 &2012022790
 Rigidbody2D:
   serializedVersion: 4

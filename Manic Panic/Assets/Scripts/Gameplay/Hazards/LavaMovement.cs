@@ -1,20 +1,25 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Controls the movement of the lava gameObject.
+/// </summary>
 public class LavaMovement : MonoBehaviour {
-	private readonly int moveForce = 37;
-
+	private const int moveForce = 37;
 	private bool isMoving = false;
-
 	private Rigidbody2D lavaRigidbody = null;
 
+	/// <summary>
+	/// Stores a reference to this gameObject's rigidbody.
+	/// </summary>
 	private void Start() {
 		lavaRigidbody = gameObject.GetComponent<Rigidbody2D>();
 	}
 
+	/// <summary>
+	/// Moves the lava up the screen if at least one player is alive.
+	/// </summary>
 	private void FixedUpdate() {
-		// Only moves if at least one player is alive.
 		if (GameObject.FindGameObjectWithTag("Player")) {
-			// Checks if we have already started to move.
 			if (!isMoving) {
 				MoveUpwards();
 			}

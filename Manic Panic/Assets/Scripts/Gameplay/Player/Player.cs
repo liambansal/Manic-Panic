@@ -4,9 +4,11 @@ public class Player : MonoBehaviour {
 	[SerializeField]
 	private string controllerPrefix = "";
 
+	/// <summary>
+	/// Used for casting rays one tile ahead of the player when jumping.
+	/// </summary>
 	[SerializeField]
-	private GameObject movePosition = null; // Used for casting rays one tile ahead of the player when jumping.
-
+	private GameObject movePosition = null;
 	[SerializeField]
 	private Sprite stunSprite = null;
 	[SerializeField]
@@ -15,10 +17,15 @@ public class Player : MonoBehaviour {
 	private const int moveDistance = 1;
 	private const int jumpDistance = 2;
 	// Bitshifted values are used for casting rays on specific unity layers.
-	// Level layer may have: Empty Tiles, Rocks, Players, Holes and Water.
+	/// <summary>
+	/// Level layer may have: Empty Tiles, Rocks, Players, Holes and Water.
+	/// </summary>
 	private const int levelLayerBitShifted = 1 << 8;
-	// The only objects that can be on the log layer are: Logs and Players.
+	/// <summary>
+	/// The only objects that can be on the log layer are: Logs and Players.
+	/// </summary>
 	private const int logLayerBitShifted = 1 << 9;
+	private int currentRaycastLayer = 0;
 
 	private const float playerRadius = 0.5f;
 	private const float raycastDistance = 0.9f;
@@ -26,10 +33,6 @@ public class Player : MonoBehaviour {
 	private const float jumpCooldown = 0.6f;
 	private const float punchCooldown = 4.0f;
 	private const float stunLength = 2.0f;
-
-	// The layer we're currently casting rays onto.
-	private int currentLayer = 0;
-
 	private float moveTimer = 0.3f;
 	private float jumpTimer = 0.6f;
 	private float punchTimer = 0.0f;
@@ -41,23 +44,32 @@ public class Player : MonoBehaviour {
 	private bool stunned = false;
 
 	private PauseMenuController pauseMenuController = null;
-
 	private Sprite playerSprite = null;
 
 	private enum Directions { Up, Left, Down, Right };
+	/// <summary>
+	/// Used for checking tiles around the player.
+	/// </summary>
+	private RaycastHit2D rayOne = new RaycastHit2D();
+	/// <summary>
+	/// Used for checking tiles around objects hit by ray one.
+	/// </summary>
+	private RaycastHit2D rayTwo = new RaycastHit2D();
 
-	private RaycastHit2D rayOne = new RaycastHit2D(); // Used for checking tiles around the player.
-	private RaycastHit2D rayTwo = new RaycastHit2D(); // Used for checking tiles around objects hit by ray one.
-
+	/// <summary>
+	/// Sets the player's sprite and gets a reference to the pause menu.
+	/// </summary>
 	private void Start() {
 		playerSprite = characterSprites[PlayerPrefs.GetInt(controllerPrefix)];
 		gameObject.GetComponent<SpriteRenderer>().sprite = playerSprite;
 		pauseMenuController = GameObject.FindGameObjectWithTag("PauseMenuController").GetComponent<PauseMenuController>();
 	}
 
+	/// <summary>
+	/// Updates various timers and handles input to control the player.
+	/// </summary>
 	private void Update() {
 		if (!pauseMenuController.isPaused) {
-			// It's only possible for the player to have a log as a parent.
 			if (transform.parent != null) {
 				// Moves the player with their parent.
 				transform.position = gameObject.transform.parent.position;
@@ -101,6 +113,7 @@ public class Player : MonoBehaviour {
 
 			if (stunTimer <= 0.0f) {
 				stunned = false;
+				// Change the player's sprite back to normal.
 				gameObject.GetComponent<SpriteRenderer>().sprite = playerSprite;
 				stunTimer = stunLength;
 			}
@@ -109,21 +122,21 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void HandleInput() {
-		// Checks input for moving.
-		if (((Input.GetAxis(controllerPrefix + "Vertical2") < 0.0f) || (Input.GetAxis(controllerPrefix + "Vertical") > 0.0f)) && canMove) {
-			HandleMovement(Directions.Up, Vector2.up);
-		} else if (((Input.GetAxis(controllerPrefix + "Vertical2") > 0.0f) || (Input.GetAxis(controllerPrefix + "Vertical") < 0.0f)) && canMove) {
-			HandleMovement(Directions.Down, Vector2.down);
+	private void HandleInput() {
+		// Check input for moving.
+		if ((Input.GetAxis(controllerPrefix + "Vertical") > 0.0f) && canMove) {
+			HandleWalking(Directions.Up, Vector2.up);
+		} else if ((Input.GetAxis(controllerPrefix + "Vertical") < 0.0f) && canMove) {
+			HandleWalking(Directions.Down, Vector2.down);
 		}
 
-		if (((Input.GetAxis(controllerPrefix + "Horizontal2") < 0.0f) || (Input.GetAxis(controllerPrefix + "Horizontal")) < 0.0f) && canMove) {
-			HandleMovement(Directions.Left, Vector2.left);
-		} else if (((Input.GetAxis(controllerPrefix + "Horizontal2") > 0.0f) || (Input.GetAxis(controllerPrefix + "Horizontal") > 0.0f)) && canMove) {
-			HandleMovement(Directions.Right, Vector2.right);
+		if ((Input.GetAxis(controllerPrefix + "Horizontal") < 0.0f) && canMove) {
+			HandleWalking(Directions.Left, Vector2.left);
+		} else if ((Input.GetAxis(controllerPrefix + "Horizontal") > 0.0f) && canMove) {
+			HandleWalking(Directions.Right, Vector2.right);
 		}
 
-		// Checks input for jumping.
+		// Check input for jumping.
 		if ((Input.GetAxis(controllerPrefix + "Jump") > 0.0f) && canJump) {
 			HandleJumping();
 		}
@@ -146,39 +159,48 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void HandleMovement(Directions rayDirection, Vector2 moveDirection) {
+	/// <summary>
+	/// Checks if the player can walk in the desired direction.
+	/// </summary>
+	/// <param name="rayDirection"> Enum case for a direction. </param>
+	/// <param name="moveDirection"> The direction the player wants to move. </param>
+	private void HandleWalking(Directions rayDirection, Vector2 moveDirection) {
 		// Loops through each layer that's part of the level.
 		for (int i = 0; i < 2; ++i) {
 			if (i == 0) {
-				currentLayer = logLayerBitShifted;
+				currentRaycastLayer = logLayerBitShifted;
 			} else if (i == 1) {
-				currentLayer = levelLayerBitShifted;
+				currentRaycastLayer = levelLayerBitShifted;
 			}
 
 			// Cast ray to check what's in the tile upward of the player.
-			rayOne = Raycast(transform, rayDirection, raycastDistance, currentLayer);
+			rayOne = Raycast(transform, rayDirection, raycastDistance, currentRaycastLayer);
 
 			if (CheckMoveDirection(rayOne)) {
 				// Tile is avaiable to move onto, just need to check its type.
 				if (CheckTileForLog(rayOne)) {
 					Move(moveDirection, moveDistance, rayOne); // Move player onto the log.
 					return;
-				} else if (!rayOne.collider || (rayOne.collider && (rayOne.collider.CompareTag("Empty Tile") || rayOne.collider.CompareTag("Danger") || rayOne.collider.CompareTag("Move Position")))) {
+				} else if (!rayOne.collider ||
+					(rayOne.collider &&
+					(rayOne.collider.CompareTag("Empty Tile") ||
+					rayOne.collider.CompareTag("Danger") ||
+					rayOne.collider.CompareTag("Move Position")))) {
 					Move(moveDirection, moveDistance, rayOne);
 					return;
 				}
 			} else if (rayOne.collider && rayOne.collider.CompareTag("Player")) {
 				// Tile has a player on there so we must push them.
 				if (Push(rayDirection, moveDirection)) {
-					for (int y = 0; y < 2; ++y) {
-						if (y == 0) {
-							currentLayer = logLayerBitShifted;
-						} else if (y == 1) {
-							currentLayer = levelLayerBitShifted;
+					for (int j = 0; j < 2; ++j) {
+						if (j == 0) {
+							currentRaycastLayer = logLayerBitShifted;
+						} else if (j == 1) {
+							currentRaycastLayer = levelLayerBitShifted;
 						}
 
 						// We just pushed the player. Cast a ray to find out what they were standing on.
-						rayOne = Raycast(transform, rayDirection, raycastDistance, currentLayer);
+						rayOne = Raycast(transform, rayDirection, raycastDistance, currentRaycastLayer);
 
 						if (CheckTileForLog(rayOne)) {
 							Move(moveDirection, moveDistance, rayOne);
@@ -193,43 +215,53 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void HandleJumping() {
+	/// <summary>
+	/// Checks if the player can jump forward by their jump distance.
+	/// </summary>
+	private void HandleJumping() {
+		// Must check each level layer for obstructions.
 		for (int i = 0; i < 2; ++i) {
 			if (i == 0) {
-				currentLayer = logLayerBitShifted; // Check log layer for collisions first.
+				currentRaycastLayer = logLayerBitShifted; // Check log layer for collisions first.
 			} else if (i == 1) {
-				currentLayer = levelLayerBitShifted;
+				currentRaycastLayer = levelLayerBitShifted;
 			}
 
 			// Cast ray to check what's in the tile upward of the player.
-			rayOne = Raycast(transform, Directions.Up, raycastDistance, currentLayer);
+			rayOne = Raycast(transform, Directions.Up, raycastDistance, currentRaycastLayer);
 
 			if (CheckMoveDirection(rayOne)) {
-				if (Vector2.Distance(gameObject.transform.position, movePosition.transform.position) < (float)moveDistance) {
-					// Move the move position if it hasn't been done already. A distance >= moveDistance means its already been done.
+				if (Vector2.Distance(gameObject.transform.position, movePosition.transform.position) < moveDistance) {
+					// Move the move position onto the tile ahead.
 					movePosition.transform.Translate((Vector2.up), Space.Self);
 				}
 
+				// Now check the tile upward of the move position.
 				for (int j = 0; j < 2; ++j) {
 					if (j == 0) {
-						currentLayer = logLayerBitShifted; // Check log layer first after casting second ray.
+						currentRaycastLayer = logLayerBitShifted; // Check log layer first after casting second ray.
 					} else if (j == 1) {
-						currentLayer = levelLayerBitShifted;
+						currentRaycastLayer = levelLayerBitShifted;
 					}
 
-					// Cast ray to check what's in the second tile upward of the player.
-					rayTwo = Raycast(movePosition.transform, Directions.Up, raycastDistance, currentLayer);
+					// Cast a ray to check what's in the tile upward of the player's move position.
+					rayTwo = Raycast(movePosition.transform, Directions.Up, raycastDistance, currentRaycastLayer);
 
 					if (CheckMoveDirection(rayTwo)) {
 						if (CheckTileForLog(rayTwo)) {
 							Move(Vector2.up, jumpDistance, rayTwo);
 							return;
-						} else if (!rayTwo.collider || (rayTwo.collider && (rayTwo.collider.CompareTag("Empty Tile") || rayTwo.collider.CompareTag("Danger") || rayTwo.collider.CompareTag("Move Position")))) {
+						} else if (!rayTwo.collider ||
+							(rayTwo.collider &&
+							(rayTwo.collider.CompareTag("Empty Tile") ||
+							rayTwo.collider.CompareTag("Danger") ||
+							rayTwo.collider.CompareTag("Move Position")))) {
 							Move(Vector2.up, jumpDistance, rayTwo);
 							return;
 						}
 					} else if (rayTwo.collider && rayTwo.collider.CompareTag("Player")) {
-						return; // Return because we don't want to jump into a tile underneath the player on a different layer.
+						// Return because we don't want to jump onto a tile underneath the player on a different layer.
+						return;
 					}
 				}
 			} else if (rayOne.collider && rayOne.collider.CompareTag("Player")) {
@@ -239,11 +271,20 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	private bool CheckMoveDirection(RaycastHit2D ray) {
-		if (ray.collider) {
-			if ((ray.collider.CompareTag("Empty Tile") || ray.collider.CompareTag("Danger") || ray.collider.CompareTag("Log") || ray.collider.CompareTag("Move Position"))) {
+	/// <summary>
+	/// Checks what type of object a raycast has collided with.
+	/// </summary>
+	/// <param name="rayHit"> Data about the object hit by a ray. </param>
+	/// <returns> True if the collided object can be moved onto by the player. </returns>
+	private bool CheckMoveDirection(RaycastHit2D rayHit) {
+		if (rayHit.collider) {
+			if ((rayHit.collider.CompareTag("Empty Tile") ||
+				rayHit.collider.CompareTag("Danger") ||
+				rayHit.collider.CompareTag("Log") ||
+				rayHit.collider.CompareTag("Move Position"))) {
 				return true;
-			} else { // Tag is something we want to collide with not move into.
+			} else {
+				// Hit object is something we want to collide with not move onto or though.
 				return false;
 			}
 		} else {
@@ -251,28 +292,42 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	private bool CheckTileForLog(RaycastHit2D ray) {
-		if (ray.collider && ray.collider.CompareTag("Log")) {
+	/// <summary>
+	/// Checks if the object hit by a ray is a log.
+	/// </summary>
+	/// <param name="rayHit"> Data about the object hit by a ray. </param>
+	/// <returns> True if the ray hit an object tagged with "Log". </returns>
+	private bool CheckTileForLog(RaycastHit2D rayHit) {
+		if (rayHit.collider && rayHit.collider.CompareTag("Log")) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	private void Move(Vector2 moveDirection, float distance, RaycastHit2D ray) {
-		if (CheckTileForLog(ray)) {
-			// If the player isn't on the log layer move them onto it, so they've don't collide with the river hazard.
-			if (gameObject.layer != ray.collider.gameObject.layer) {
-				gameObject.layer = ray.collider.gameObject.layer;
+	/// <summary>
+	/// Moves the player onto a tile in the argument direction and by the argument distance.
+	/// </summary>
+	/// <param name="moveDirection"> The direction to move. </param>
+	/// <param name="distance"> The distance to move. </param>
+	/// <param name="rayHit"> Data about the object hit by a ray. </param>
+	private void Move(Vector2 moveDirection, float distance, RaycastHit2D rayHit) {
+		if (CheckTileForLog(rayHit)) {
+			// If the player isn't on the log layer move them onto it, so they've don't collide
+			// with the river hazard.
+			if (gameObject.layer != rayHit.collider.gameObject.layer) {
+				gameObject.layer = rayHit.collider.gameObject.layer;
 			}
 
-			transform.SetParent(ray.collider.gameObject.transform); // Set the player's parent to log.
-		} else if (ray.collider) {
+			// Set the player's parent to log.
+			transform.SetParent(rayHit.collider.gameObject.transform);
+		} else if (rayHit.collider) {
 			// If the player isn't on the level layer move them onto it.
-			if (gameObject.layer != ray.collider.gameObject.layer) {
-				gameObject.layer = ray.collider.gameObject.layer;
+			if (gameObject.layer != rayHit.collider.gameObject.layer) {
+				gameObject.layer = rayHit.collider.gameObject.layer;
 			}
 
+			// The player won't have a parent whilst on this layer.
 			transform.SetParent(null);
 		}
 
@@ -282,46 +337,60 @@ public class Player : MonoBehaviour {
 		gameObject.transform.position = ClampPosition(gameObject.transform.position);
 		canMove = false;
 		canJump = false;
+		// Resets the player's move position to their position.
 		movePosition.transform.localPosition = Vector2.zero;
 	}
 
+	/// <summary>
+	/// Pushes a player along a desired move direction if the tile behind them is free.
+	/// </summary>
+	/// <param name="rayDirection"> Enum case for a direction. </param>
+	/// <param name="moveDirection"> The desired direction to move. </param>
+	/// <returns> True if a player has been pushed. </returns>
 	private bool Push(Directions rayDirection, Vector2 moveDirection) {
 		// Loops though each layer and checks for collisions.
 		for (int i = 0; i < 2; ++i) {
 			if (i == 0) {
-				currentLayer = logLayerBitShifted;
+				currentRaycastLayer = logLayerBitShifted;
 			} else if (i == 1) {
-				currentLayer = levelLayerBitShifted;
+				currentRaycastLayer = levelLayerBitShifted;
 			}
 
-			// Cast ray to check what's in the tile upward of what we're pushing
-			rayTwo = Raycast(rayOne.collider.transform, rayDirection, raycastDistance, currentLayer);
+			// Cast a ray, along the move direction, to check what's in the adjacent tile to the 
+			// player we're wanting to push.
+			rayTwo = Raycast(rayOne.collider.transform, rayDirection, raycastDistance, currentRaycastLayer);
 
 			if (CheckMoveDirection(rayTwo)) {
-				// Can push player.
 				if (CheckTileForLog(rayTwo)) {
-					// Push them onto a log.
 					GameObject pushObjectsParent = null;
 
-					if (rayOne.collider.gameObject.transform.parent) { // Check if pushed player has a parent.
+					// Check if player to push has a parent.
+					if (rayOne.collider.gameObject.transform.parent) {
 						pushObjectsParent = rayOne.collider.gameObject.transform.parent.gameObject;
 					}
 
-					if (rayOne.collider.gameObject.layer != rayTwo.collider.gameObject.layer) { // Check that the pushed player is on the log layer.
-						rayOne.collider.gameObject.layer = rayTwo.collider.gameObject.layer; // Put pushed player on same layer as log. 
-					}
-
-					rayOne.collider.gameObject.transform.SetParent(rayTwo.collider.transform); // Set log as pushed player's parent.
-					rayOne.collider.gameObject.transform.position = rayTwo.collider.transform.position; // Push player onto the log.
-					return true; // Return true after pushing the player.
-				} else { // Push them onto an empty tile.
-					if (rayOne.collider.gameObject.layer != rayTwo.collider.gameObject.layer) { // Check that the pushed player is on the level layer.
+					// Check if the player to push is on the log layer.
+					if (rayOne.collider.gameObject.layer != rayTwo.collider.gameObject.layer) {
 						rayOne.collider.gameObject.layer = rayTwo.collider.gameObject.layer;
 					}
 
-					rayOne.transform.SetParent(null); // Delete parent.
-					rayOne.transform.Translate(moveDirection * moveDistance, Space.World); // Move pushed player to the empty tile.
-					return true; // Return true after pushing player.
+					// Set the log as the player to push's parent.
+					rayOne.collider.gameObject.transform.SetParent(rayTwo.collider.transform);
+					// Push the player onto the log.
+					rayOne.collider.gameObject.transform.position = rayTwo.collider.transform.position;
+					// Return true after pushing the player.
+					return true;
+				} else { // Push them onto an free tile.
+					// Check that the pushed player is on the level layer.
+					if (rayOne.collider.gameObject.layer != rayTwo.collider.gameObject.layer) {
+						rayOne.collider.gameObject.layer = rayTwo.collider.gameObject.layer;
+					}
+
+					rayOne.transform.SetParent(null);
+					// Move pushed player onto the empty tile.
+					rayOne.transform.Translate(moveDirection * moveDistance, Space.World);
+					// Return true after pushing player.
+					return true;
 				}
 
 			} else if (rayTwo.collider && rayTwo.collider.CompareTag("Player")) {
@@ -334,14 +403,21 @@ public class Player : MonoBehaviour {
 		return false;
 	}
 
+	/// <summary>
+	/// Casts a ray in the desired direction, from the player, to stun another player.
+	/// </summary>
+	/// <param name="punchDirection"> Enum case for a direction. </param>
 	private void Punch(Directions punchDirection) {
 		switch (punchDirection) {
 			case Directions.Up: {
+				// Cast a ray upward from the player to check for collisions on the log layer.
 				rayOne = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + playerRadius), Vector2.up, raycastDistance, logLayerBitShifted);
 
 				if (rayOne.collider) {
+					// Break after hitting an object, even if it's not a player.
 					break;
 				} else {
+					// Cast a ray to check for collisions on the level layer.
 					rayOne = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + playerRadius), Vector2.up, raycastDistance, levelLayerBitShifted);
 				}
 
@@ -383,62 +459,77 @@ public class Player : MonoBehaviour {
 		}
 
 		if (rayOne.collider && rayOne.collider.gameObject.CompareTag("Player")) {
+			// Stun any player hit by the ray.
 			rayOne.collider.gameObject.GetComponent<Player>().Stunned();
 		}
 	}
 
+	/// <summary>
+	/// Stuns the player and drops a coin, decreasing their score.
+	/// </summary>
 	public void Stunned() {
 		stunned = true;
 		gameObject.GetComponent<SpriteRenderer>().sprite = stunSprite;
-		gameObject.GetComponent<TreasureBag>().DropTreasure();
+		// Casts a ray to check which direction to drop a coin in.
+		gameObject.GetComponent<TreasureBag>().CastRay();
 	}
 
-	private RaycastHit2D Raycast(Transform origin, Directions direction, float distance, int layer) {
-		switch (direction) {
+	/// <summary>
+	/// Method for casting rays in world space.
+	/// </summary>
+	/// <param name="objectTransform"> The origin of the ray in the form of a transform. </param>
+	/// <param name="rayDirection"> Direction to cast the ray. </param>
+	/// <param name="distance"> Length of the ray. 1.0f = 1 Unity unit. </param>
+	/// <param name="layer"> The raycasts target layer. </param>
+	/// <returns> Data about the object hit by the ray. </returns>
+	private RaycastHit2D Raycast(Transform objectTransform, Directions rayDirection, float distance, int layer) {
+		switch (rayDirection) {
 			case Directions.Up: {
-				Debug.DrawRay(new Vector2(origin.position.x, origin.position.y + playerRadius), Vector2.up, Color.red, 10.0f);
-				return Physics2D.Raycast(new Vector2(origin.position.x, origin.position.y + playerRadius), Vector2.up, distance, layer);
+				// Casts a ray up from the transform.
+				return Physics2D.Raycast(new Vector2(objectTransform.position.x, objectTransform.position.y + playerRadius), Vector2.up, distance, layer);
 			}
 			case Directions.Left: {
-				Debug.DrawRay(new Vector2(origin.position.x - playerRadius, origin.position.y), Vector2.left, Color.red, 10.0f);
-				return Physics2D.Raycast(new Vector2(origin.position.x - playerRadius, origin.position.y), Vector2.left, distance, layer);
+				return Physics2D.Raycast(new Vector2(objectTransform.position.x - playerRadius, objectTransform.position.y), Vector2.left, distance, layer);
 			}
 			case Directions.Down: {
-				Debug.DrawRay(new Vector2(origin.position.x, origin.position.y - playerRadius), Vector2.down, Color.red, 10.0f);
-				return Physics2D.Raycast(new Vector2(origin.position.x, origin.position.y - playerRadius), Vector2.down, distance, layer);
+				return Physics2D.Raycast(new Vector2(objectTransform.position.x, objectTransform.position.y - playerRadius), Vector2.down, distance, layer);
 			}
 			case Directions.Right: {
-				Debug.DrawRay(new Vector2(origin.position.x + playerRadius, origin.position.y), Vector2.right, Color.red, 10.0f);
-				return Physics2D.Raycast(new Vector2(origin.position.x + playerRadius, origin.position.y), Vector2.right, distance, layer);
+				return Physics2D.Raycast(new Vector2(objectTransform.position.x + playerRadius, objectTransform.position.y), Vector2.right, distance, layer);
 			}
 			default: {
-				Debug.DrawRay(new Vector2(origin.position.x + playerRadius, origin.position.y), Vector2.up, Color.blue, 10.0f);
-				return Physics2D.Raycast(new Vector2(origin.position.x, origin.position.y), Vector2.up, 0.0f, layer);
+				return Physics2D.Raycast(new Vector2(objectTransform.position.x, objectTransform.position.y), Vector2.up, 0.0f, layer);
 			}
 		}
 	}
 
-	Vector2 ClampPosition(Vector2 position) {
+	/// <summary>
+	/// Clamps a Vector2's x & y coordinates to values ending in .5.
+	/// </summary>
+	/// <param name="position"> The position to clamp. </param>
+	/// <returns> The Vector2 clamped. </returns>
+	private Vector2 ClampPosition(Vector2 position) {
 		// Gets two scalar values for comparing whether or not we need to clamp the player's x/y 
 		// position up or down to the nearest float ending in .5.
-		// NormalisedVector.x/y > 0.0f would mean we need to clamp up.
 		Vector2 normalisedVector = position.normalized;
+		const float positionOffset = 0.5f;
 
+		// NormalisedVector.x/y > 0.0f would mean we need to clamp up.
 		if (normalisedVector.x > 0.0f) {
 			// Casting a float to an integer truncates the number so we get a whole number.
-			// Simply add/subtract 0.5 to allign the scalar value to the level's tilemap.
-			position.x = (int)position.x + 0.5f;
+			// Simply add/subtract positionOffset to allign the scalar value to the level's
+			// tilemap.
+			position.x = (int)position.x + positionOffset;
 		} else if (normalisedVector.x <= 0.0f) {
-			position.x = (int)position.x - 0.5f;
+			position.x = (int)position.x - positionOffset;
 		}
 
 		if (normalisedVector.y > 0.0f) {
-			position.y = (int)position.y + 0.5f;
+			position.y = (int)position.y + positionOffset;
 		} else if (normalisedVector.y <= 0.0f) {
-			position.y = (int)position.y - 0.5f;
+			position.y = (int)position.y - positionOffset;
 		}
 
-		Vector2 clampedVector = position;
-		return clampedVector;
+		return position;
 	}
 }

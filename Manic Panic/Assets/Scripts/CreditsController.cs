@@ -3,15 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class CreditsController : MonoBehaviour {
 	private float timeInScene = 0.0f;
-	private float sceneLength = 6.0f;
+	private const float sceneLength = 5.0f;
 
+	/// <summary>
+	/// Updates the time in this scene and loads the main menu after a set time.
+	/// </summary>
 	private void Update() {
 		timeInScene += Time.deltaTime;
 
-		// Once we've been in the scene long enough...
 		if (timeInScene >= sceneLength) {
-			// ...load the main menu.
-			SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+			const string mainMenuName = "Main Menu";
+			SceneManager.LoadScene(mainMenuName, LoadSceneMode.Single);
 		}
 	}
 }

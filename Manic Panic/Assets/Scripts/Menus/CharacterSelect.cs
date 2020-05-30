@@ -2,50 +2,79 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controls the process of selecting a character for each player. Saves necessary data about players/characters through "PlayerPrefs".
+/// </summary>
 public class CharacterSelect : MonoBehaviour {
 	[SerializeField]
 	private Sprite[] characterSprites = new Sprite[4];
-
 	[SerializeField]
 	private Image[] displayedImage = new Image[4];
 
-	// We need at least two players to play against each other.
+	/// <summary>
+	/// Records which character has been selected for each player.
+	/// </summary>
+	private readonly int[] characterPosition = new int[4];
+	/// <summary>
+	/// We need at least two players to play against each other.
+	/// </summary>
 	private const int minimumPlayers = 2;
-	// We only support up to four players.
+	/// <summary>
+	/// We only support up to four players.
+	/// </summary>
 	private const int maximumPlayers = 4;
-	// This should be one less than the maximum players.
+	/// <summary>
+	/// This should be one less than the maximum players.
+	/// </summary>
 	private const int maximumArrayIndex = 3;
-
-	// How many people are playing.
-	private int[] characterPosition = new int[4];
 	private int playerCount = 0;
-
-	// Decides whether or not a player can select a different character.
+	/// <summary>
+	/// Decides whether or not a player can select a different character.
+	/// </summary>
 	private float[] selectTimer = new float[4];
-	private float selectCooldown = 0.25f;
+	private const float selectCooldown = 0.25f;
 
-	// Which players are playing. Represents player 1 through 4.
-	private bool[] players = new bool[4] { false, false, false, false };
-	// Which players have selected a character.
-	private bool[] playerReady = new bool[4] { false, false, false, false };
-	// Is the player allowed to select a different character?
-	private bool[] canSelect = new bool[4] { false, false, false, false };
-	// Is the selected character available.
-	private bool[] characterAvailable = new bool[4] { true, true, true, true };
+	private readonly bool[] characterAvailable = new bool[4] { true, true, true, true };
+	// The following arrays represent values for players one through four.
+	/// <summary>
+	/// Which players are playing.
+	/// </summary>
+	private readonly bool[] players = new bool[4] { false, false, false, false };
+	private readonly bool[] playerReady = new bool[4] { false, false, false, false };
+	private readonly bool[] canSelect = new bool[4] { false, false, false, false };
+	/// <summary>
+	/// Matching prefixes for project settings inputs. 
+	/// </summary>
+	private readonly string[] playerPrefixes = new string[4] { "P1", "P2", "P3", "P4" };
+	private const string firstLevelName = "Level One";
+	private const string playerCountKey = "Player Count";
+	/// <summary>
+	/// Name of axis that is responsible for confirming input.
+	/// </summary>
+	private const string confirmAxisName = "Jump";
+	/// <summary>
+	/// Name of axis that is responsible for selecting characters.
+	/// </summary>
+	private const string selectAxisName = "Vertical";
 
-	// Matching prefixes for project settings inputs.
-	private string[] playerPrefixes = new string[4] { "P1", "P2", "P3", "P4"};
-
+	/// <summary>
+	/// Initializes the select timer for each player and their character position.
+	/// </summary>
 	private void Start() {
-		// Initialize arrays.
 		for (int i = 0; i < maximumPlayers; ++i) {
 			selectTimer[i] = selectCooldown;
 			characterPosition[i] = 0;
 		}
 	}
 
+	/// <summary>
+	/// Handles all character select input (joining, selecting, confirmation).
+	/// Updates each characters' timer for switching between characters.
+	/// </summary>
 	private void Update() {
+		// Loops through each player.
 		for (int i = 0; i < maximumPlayers; ++i) {
+			// Checks if they're playing and un-ready.
 			if (players[i] && !playerReady[i]) {
 				selectTimer[i] -= Time.deltaTime;
 
@@ -65,14 +94,13 @@ public class CharacterSelect : MonoBehaviour {
 	/// Checks if a player wants to join the game.
 	/// </summary>
 	private void AddPlayer() {
+		// Loops through each player.
 		for (int i = 0; i < maximumPlayers; ++i) {
 			// If the player hasn't already opted in to play.
 			if (players[i] == false) {
-				// Check if the player wants to play.
-				if (Input.GetAxis(playerPrefixes[i] + "Jump") > 0.0f) {
-					// Note the player is playing.
+				// Check for input to find out if the player wants to play.
+				if (Input.GetAxis(playerPrefixes[i] + confirmAxisName) > 0.0f) {
 					players[i] = true;
-					// Increase the number of players who have confirmed to play.
 					playerCount++;
 					// Display a character sprite for the player, replacing the prompt to join 
 					// image.
@@ -83,8 +111,7 @@ public class CharacterSelect : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Allows each player to loop through the different characters.
-	/// Automatically shows whether or not a character is available to play.
+	/// Allows each player to browse through the different characters.
 	/// </summary>
 	private void SelectCharacter() {
 		// Loop through each player.
@@ -93,13 +120,13 @@ public class CharacterSelect : MonoBehaviour {
 			// cooled down.
 			if (players[i] && !playerReady[i] && canSelect[i]) {
 				// Check for input to select a different character.
-				if (Input.GetAxis(playerPrefixes[i] + "Vertical") > 0.0f) {
+				if (Input.GetAxis(playerPrefixes[i] + selectAxisName) > 0.0f) {
 					// Start the cooldown time for this players character selection.
 					// Stops the player from moving through the character selections at a rate too 
 					// fast to control.
 					canSelect[i] = false;
 					selectTimer[i] = selectCooldown;
-					// Increase the character position to select the next playable character.
+					// Selects the next playable character.
 					++characterPosition[i];
 
 					// Once the last playable character has been reached...
@@ -113,18 +140,13 @@ public class CharacterSelect : MonoBehaviour {
 					displayedImage[i].sprite = characterSprites[characterPosition[i]];
 
 					// Checks if the selected character is available.
+					// Sets the character's sprite colour based on its availability.
 					if (characterAvailable[characterPosition[i]]) {
-						// Set players character image to white to show that the selected 
-						// character is available to play.
 						displayedImage[i].color = Color.white;
 					} else {
-						// Set players character image to grey to show that the selected 
-						// character is not available to play.
 						displayedImage[i].color = Color.grey;
 					}
-				} else if (Input.GetAxis(playerPrefixes[i] + "Vertical") < 0.0f) {
-					// Same code as previous if statement except we're selecting the previous 
-					// character this time.
+				} else if (Input.GetAxis(playerPrefixes[i] + selectAxisName) < 0.0f) {
 					canSelect[i] = false;
 					selectTimer[i] = selectCooldown;
 					--characterPosition[i];
@@ -146,16 +168,14 @@ public class CharacterSelect : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Checks if players want to confirm their character choice, marking them as ready.
+	/// Checks if the players want to confirm their character choice, marking them as ready.
 	/// </summary>
 	private void ConfirmCharacter() {
 		for (int i = 0; i < maximumPlayers; ++i) {
 			if (canSelect[i]) {
-				// Check the player is playing and the character is available to play.
 				if (players[i] && characterAvailable[characterPosition[i]]) {
-					// Check for confirmation of their character.
-					if (Input.GetAxis(playerPrefixes[i] + "Jump") > 0.0f) {
-						// Mark the player as ready.
+					// Check for input to confirm their character choice.
+					if (Input.GetAxis(playerPrefixes[i] + confirmAxisName) > 0.0f) {
 						playerReady[i] = true;
 						// Mark the selected character as unavailable so other players can't 
 						// select them.
@@ -177,23 +197,20 @@ public class CharacterSelect : MonoBehaviour {
 	private void LoadLevel() {
 		int playersReady = 0;
 
-		// Checks if all the players have selected a character.
+		// Checks if any players have selected a character.
 		for (int i = 0; i < maximumPlayers; ++i) {
 			if (playerReady[i] == true) {
-				// Confirm another player is ready.
 				++playersReady;
 			}
 		}
 
-		// If we at least have the minimum number of players to play...
+		// Check if we at least have the minimum number of players to play before loading a level.
 		if (playerCount >= minimumPlayers) {
-			// ...check they're all ready.
 			if (playersReady == playerCount) {
 				// Record how many players are playing so we spawn the appropriate amount of 
 				// characters later on.
-				PlayerPrefs.SetInt("Player Count", playersReady);
-				// Load a gameplay scene here.
-				SceneManager.LoadScene("Level One", LoadSceneMode.Single);
+				PlayerPrefs.SetInt(playerCountKey, playersReady);
+				SceneManager.LoadScene(firstLevelName, LoadSceneMode.Single);
 			}
 		}
 	}
